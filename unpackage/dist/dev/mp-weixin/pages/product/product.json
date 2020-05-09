@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "详情展示",
+  "usingComponents": {
+    "uni-login": "/components/uni-login",
+    "share": "/components/share"
+  }
+}

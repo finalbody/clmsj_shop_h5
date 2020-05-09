@@ -1,0 +1,293 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page{
+	background: $page-color-base;
+}
+.flex-between{display: -webkit-box;display: -webkit-flex;display: flex;-webkit-box-pack: justify;-webkit-justify-content: space-between;justify-content: space-between;}
+.red{color: #FF0000;margin: 0px 2px;}
+.pickBox{display: -webkit-box;display: -webkit-flex;display: flex; -webkit-box-pack: end; -webkit-justify-content: flex-end; justify-content: flex-end; -webkit-flex-wrap: wrap; flex-wrap: wrap;}
+.pickBox .pickItem{
+	margin: 5px 5px; 
+	border: 1px solid #D9D9D9; 
+	padding: 5px 6px;
+	min-width: 40px; 
+	border-radius: 5px;
+	white-space:nowrap;
+}
+.pickBox .on{
+	background: #F76260;
+	border: 1px solid #F76260;
+	color: #FFFFFF;
+}
+.tips{
+	padding: 0px;
+}
+.tips .mask-bg{
+	left: 0;right: 0;top: 0;bottom: 0; background: #303133;opacity: 0.5; z-index: 98;position: fixed;
+}
+.tips .mask-box{
+	position: fixed;bottom: calc(50% - 75px); left: 10%;right: 10%;z-index: 99;background: #ffffff;padding: 20px;min-height: 150px;border-radius: 5px;
+}
+/* 上传 */
+.uni-uploader {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.uni-uploader-head {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.uni-uploader-info {
+	color: #B2B2B2;
+}
+.uni-uploader-body {
+	margin-top: 0rpx;
+}
+.uni-uploader__files {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+}
+.uni-uploader__file {
+	margin: 10rpx;
+	width: 210rpx;
+	height: 210rpx;
+}
+.uni-uploader__img {
+	display: block;
+	width: 210rpx;
+	height: 210rpx;
+}
+.uni-uploader__input-box {
+	position: relative;
+	margin:10rpx;
+	width: 208rpx;
+	height: 208rpx;
+	border: 2rpx solid #D9D9D9;
+}
+.uni-uploader__input-box:before,
+.uni-uploader__input-box:after {
+	content: " ";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background-color: #D9D9D9;
+}
+.uni-uploader__input-box:before {
+	width: 4rpx;
+	height: 79rpx;
+}
+.uni-uploader__input-box:after {
+	width: 79rpx;
+	height: 4rpx;
+}
+.uni-uploader__input-box:active {
+	border-color: #999999;
+}
+.uni-uploader__input-box:active:before,
+.uni-uploader__input-box:active:after {
+	background-color: #999999;
+}
+.uni-uploader__input {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+.uni-uploader__file{width: 60px;height: 60px;}
+.uni-uploader__input-box{width: 60px;height: 60px;}
+.uni-uploader__img{width: 60px;height: 60px;}
+page {
+  background: #f8f8f8;
+}
+.list-cell {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+          align-items: baseline;
+  padding: 20rpx 30rpx;
+  line-height: 60rpx;
+  position: relative;
+  background: #fff;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.list-cell.log-out-btn {
+  margin-top: 40rpx;
+}
+.list-cell.log-out-btn .cell-tit {
+  color: #fa436a;
+  text-align: center;
+  margin-right: 0;
+}
+.list-cell.cell-hover {
+  background: #fafafa;
+}
+.list-cell.b-b:after {
+  left: 0rpx;
+}
+.list-cell.m-t {
+  margin-top: 16rpx;
+}
+.list-cell .cell-more {
+  width: calc(70% - 10px);
+  -webkit-align-self: baseline;
+          align-self: baseline;
+  font-size: 28rpx;
+  color: #909399;
+  margin-left: 10rpx;
+}
+.list-cell .cell-tit {
+  vertical-align: top;
+  width: calc(30% - 10rpx);
+  font-size: 30rpx;
+  color: #303133;
+  margin-right: 10rpx;
+}
+.list-cell .cell-tit .tit-desc {
+  font-size: 14px;
+  color: #555555;
+  line-height: 25px;
+}
+.list-cell .cell-tip {
+  font-size: 28rpx;
+  color: #909399;
+}
+.list-cell .btn-block {
+  width: 100%;
+}
+.list-cell .input {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+  border: 0px solid #EEEEEE;
+  padding: 2px 5px;
+  border-radius: 5px;
+  text-align: right;
+}
+.list-cell switch {
+  -webkit-transform: translateX(16rpx) scale(0.84);
+          transform: translateX(16rpx) scale(0.84);
+}
+.list-cell-row {
+  /* display:flex; */
+  /* align-items:baseline; */
+  padding: 20rpx 30rpx;
+  line-height: 60rpx;
+  position: relative;
+  background: #fff;
+  /* justify-content: space-between; */
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.list-cell-row.log-out-btn {
+  margin-top: 40rpx;
+}
+.list-cell-row.log-out-btn .cell-tit {
+  color: #fa436a;
+  text-align: center;
+  margin-right: 0;
+}
+.list-cell-row.cell-hover {
+  background: #fafafa;
+}
+.list-cell-row.b-b:after {
+  left: 0rpx;
+}
+.list-cell-row.m-t {
+  margin-top: 16rpx;
+}
+.list-cell-row .cell-more {
+  width: calc(100% - 10rpx);
+  -webkit-align-self: baseline;
+          align-self: baseline;
+  font-size: 28rpx;
+  color: #909399;
+  margin-left: 10rpx;
+}
+.list-cell-row .cell-tit {
+  vertical-align: top;
+  width: calc(100% - 10rpx);
+  font-size: 30rpx;
+  color: #303133;
+  margin-right: 10rpx;
+}
+.list-cell-row .cell-tit .tit-desc {
+  font-size: 14px;
+  color: #555555;
+  line-height: 25px;
+}
+.list-cell-row .cell-tip {
+  font-size: 28rpx;
+  color: #909399;
+}
+.list-cell-row .btn-block {
+  width: 100%;
+}
+.list-cell-row .textarea {
+  width: 100%;
+  min-height: 135px;
+  line-height: 25px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+  border: 1px solid #EEEEEE;
+  padding: 5px 5px;
+  border-radius: 5px;
+  text-align: left;
+  margin-top: 10px;
+}
+.list-cell-row .input {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+  border: 0px solid #EEEEEE;
+  padding: 2px 5px;
+  border-radius: 5px;
+  text-align: right;
+}
+

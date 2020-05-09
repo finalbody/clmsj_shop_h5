@@ -1,0 +1,282 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"enablePullDownRefresh": true,
+				// #ifdef MP 
+				"navigationBarTitleText": "潮流买手街",
+				//"navigationStyle": "custom",
+				// #endif 
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"searchInput": {
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "请输入地址 如：上衣",
+							"disabled": true,
+							"placeholderColor": "#606266"
+						},
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60d",
+								"fontSize": "26",
+								"color": "#303133",
+								"float": "left",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "27",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/user/center",
+			"style": {
+				"navigationBarTitleText": "我的钱包"
+			}
+		},
+		{
+			"path": "pages/user/withdrawlist",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "资金列表"
+			}
+		},
+		{
+			"path": "pages/user/balancelist",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "资金列表"
+			}
+		},
+		{
+			"path": "pages/user/rebatelist",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "返利列表"
+			}
+		},
+		{
+			"path": "pages/user/sublist",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "我的下级"
+			}
+		},
+		
+		{
+		    "path" : "pages/shop/index",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "潮流买手街"
+			}
+		},
+		{
+		    "path" : "pages/shop/live",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "直播列表"
+			}
+		},
+		{
+		    "path" : "pages/shop/team", 
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "供货商团队"
+			}
+		},
+		{
+            "path" : "pages/product/list",
+            "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商品列表"
+			}
+        },
+		
+		{
+			"path": "pages/product/product",
+			"style": {
+				"navigationBarTitleText": "详情展示",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+            "path" : "pages/shop/list",
+            "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商品选货"
+			}
+        },
+		{
+		    "path" : "pages/shop/order",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "店内销售订单"
+			}
+		},
+		{
+		    "path" : "pages/shop/detail",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "店内销售订单详情"
+			}
+		},
+		{
+			"path": "pages/shop/init",
+			"style": {
+				"navigationBarTitleText": "店铺资料"
+			}
+		}, 
+		{
+			"path": "pages/user/set",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		}, {
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				"usingComponents": {
+					"subscribe": "plugin-private://wx2b03c6e691cd7370/components/subscribe/subscribe"
+				},
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/order/detail",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/money/money",
+			"style": {}
+		}, {
+			"path": "pages/order/createOrder",
+			"style": {
+				"navigationBarTitleText": "创建订单"
+			}
+		}, {
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		}, {
+			"path": "pages/address/addressManage",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/money/pay",
+			"style": {
+				"navigationBarTitleText": "支付"
+			}
+		},
+		{
+			"path": "pages/money/paySuccess",
+			"style": {
+				"navigationBarTitleText": "支付成功"
+			}
+		}
+	    ,{
+            "path" : "pages/notice/notice",
+            "style" : {
+				"navigationBarTitleText": "通知"
+			}
+        }
+        ,{
+            "path" : "pages/category/category",
+            "style" : {
+				"navigationBarTitleText": "分类",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+        }
+      
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "潮流买手街",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#f8f8f8"
+	}
+	
+}

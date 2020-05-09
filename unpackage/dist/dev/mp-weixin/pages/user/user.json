@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "我的",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "subscribe": "plugin-private://wx2b03c6e691cd7370/components/subscribe/subscribe",
+    "uni-login": "/components/uni-login",
+    "page-bottom": "/components/page-bottom",
+    "list-cell": "/components/mix-list-cell"
+  }
+}

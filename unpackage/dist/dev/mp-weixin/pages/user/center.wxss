@@ -1,0 +1,126 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+.wrap {
+  font-size: 30rpx;
+  padding: 30rpx;
+  color: #666;
+}
+.wrap .background {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 200rpx;
+  background-color: #9557ef;
+  z-index: -1;
+}
+.wrap .head {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  border: 1rpx solid #ddd;
+  border-radius: 10rpx;
+  padding: 30rpx 30rpx;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-bottom: 20rpx;
+  background-color: white;
+}
+.wrap .head .hd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.wrap .head .hd .head-img image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin-right: 25rpx;
+}
+.wrap .head .hd .info .name {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.wrap .body {
+  border: 1rpx solid #ddd;
+  border-radius: 10rpx;
+  padding: 10rpx 30rpx;
+}
+.wrap .body .item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+}
+.wrap .body .item .ft {
+  color: #999;
+  font-size: 40rpx;
+}
+.wrap .body .item:last-child {
+  border-bottom: 0;
+}
+.btn {
+  padding: 5rpx 15rpx;
+  border-radius: 4rpx;
+  border: 1rpx solid #ddd;
+}
+.btn.green {
+  background-color: #9557ef;
+  border: 0;
+  color: white;
+}
+.withdraw-popup .mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.withdraw-popup .popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 35%;
+  width: 80%;
+  background-color: white;
+  margin: 0 auto;
+  padding: 25rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.withdraw-popup .popup input {
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  margin: 20rpx 0;
+}
+.withdraw-popup .popup .confirm {
+  border-radius: 8rpx;
+  padding: 15rpx;
+  background-color: #9557ef;
+  color: white;
+}
+

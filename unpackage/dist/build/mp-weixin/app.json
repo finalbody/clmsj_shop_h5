@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/center",
+    "pages/user/withdrawlist",
+    "pages/user/balancelist",
+    "pages/user/rebatelist",
+    "pages/user/sublist",
+    "pages/shop/index",
+    "pages/shop/live",
+    "pages/product/list",
+    "pages/product/product",
+    "pages/shop/list",
+    "pages/shop/order",
+    "pages/shop/detail",
+    "pages/shop/init",
+    "pages/user/set",
+    "pages/cart/cart",
+    "pages/public/login",
+    "pages/user/user",
+    "pages/detail/detail",
+    "pages/order/order",
+    "pages/order/detail",
+    "pages/money/money",
+    "pages/order/createOrder",
+    "pages/address/address",
+    "pages/address/addressManage",
+    "pages/money/pay",
+    "pages/money/paySuccess",
+    "pages/notice/notice",
+    "pages/category/category"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "潮流买手街",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#f8f8f8"
+  },
+  "uniStatistics": {
+    "enable": false
+  },
+  "plugins": {
+    "live-player-plugin": {
+      "version": "1.0.7",
+      "provider": "wx2b03c6e691cd7370"
+    }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx6885acbedba59c14"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "购买商品配送时，需要获取用户位置，方便发货"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

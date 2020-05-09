@@ -1,0 +1,436 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+@font-face {
+    font-family: iconfont;
+    font-weight: normal;
+    font-style: normal;
+    src: url(data:font/ttf;base64,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ZWd1bGFyaWNvbmZvbnRpY29uZm9udFZlcnNpb24gMS4waWNvbmZvbnRHZW5lcmF0ZWQgYnkgc3ZnMnR0ZiBmcm9tIEZvbnRlbGxvIHByb2plY3QuaHR0cDovL2ZvbnRlbGxvLmNvbQAKAEMAcgBlAGEAdABlAGQAIABiAHkAIABpAGMAbwBuAGYAbwBuAHQACgBpAGMAbwBuAGYAbwBuAHQAUgBlAGcAdQBsAGEAcgBpAGMAbwBuAGYAbwBuAHQAaQBjAG8AbgBmAG8AbgB0AFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBuAGYAbwBuAHQARwBlAG4AZQByAGEAdABlAGQAIABiAHkAIABzAHYAZwAyAHQAdABmACAAZgByAG8AbQAgAEYAbwBuAHQAZQBsAGwAbwAgAHAAcgBvAGoAZQBjAHQALgBoAHQAdABwADoALwAvAGYAbwBuAHQAZQBsAGwAbwAuAGMAbwBtAAAAAAIAAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAECAQMBBAEFAQYBBwEIAQkBCgELAQwBDQAKeW91amlhbnRvdQdsaWViaWFvCGxpZWJpYW8xCXNoYW5nZGlhbgV6aGlibwdkaW5nZGFuBWNoZWNrDWljb24tcXVlc3Rpb24Gc2hpcGluBnNob3V5ZQRzYXZlAAA=) format("truetype");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconyoujiantou:before {
+  content: "\e68c";
+}
+.iconliebiao:before {
+  content: "\e609";
+}
+.iconliebiao1:before {
+  content: "\e611";
+}
+.iconshangdian:before {
+  content: "\e693";
+}
+.iconzhibo:before {
+  content: "\e8c1";
+}
+.icondingdan:before {
+  content: "\e64b";
+}
+.iconcheck:before {
+  content: "\e605";
+}
+.iconicon-question:before {
+  content: "\e66b";
+}
+.iconshipin:before {
+  content: "\e695";
+}
+.iconshouye:before {
+  content: "\e771";
+}
+.iconsave:before {
+  content: "\e996";
+}
+/*
+		全局公共样式和字体图标
+	*/
+@font-face {
+  font-family: yticon;
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://at.alicdn.com/t/font_1749157_x73lgogykpd.ttf") format("truetype");
+}
+.yticon {
+  font-family: "yticon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-zhibo:before {
+  content: "\e701";
+}
+.icon-xinshangpin:before {
+  content: "\e619";
+}
+.icon-zhudashangpin:before {
+  content: "\e608";
+}
+.icon-bianhao:before {
+  content: "\e6e3";
+}
+.icon-dianpu:before {
+  content: "\e61c";
+}
+.icon-dianpu1:before {
+  content: "\e6d9";
+}
+.icon-qianbao:before {
+  content: "\e63d";
+}
+.icon-yiguoqi1:before {
+  content: "\e700";
+}
+.icon-jiarugonghuoshang:before {
+  content: "\e78f";
+}
+.icon-shanchu:before {
+  content: "\e744";
+}
+.icon-iconfontshanchu1:before {
+  content: "\e619";
+}
+.icon-iconfontweixin:before {
+  content: "\e611";
+}
+.icon-alipay:before {
+  content: "\e636";
+}
+.icon-shang:before {
+  content: "\e624";
+}
+.icon-gerenzhongxin:before {
+  content: "\e7aa";
+}
+.icon-shouye:before {
+  content: "\e627";
+}
+.icon-shanchu4:before {
+  content: "\e622";
+}
+.icon-xiaoxi:before {
+  content: "\e618";
+}
+.icon-xiaoxi:before {
+  content: "\e618";
+}
+.icon-jiantour-copy:before {
+  content: "\e600";
+}
+.icon-fenxiang2:before {
+  content: "\e61e";
+}
+.icon-pingjia:before {
+  content: "\e67b";
+}
+.icon-quanbudingdan:before {
+  content: "\e75f";
+}
+.icon-daifukuan:before {
+  content: "\e774";
+}
+.icon-pinglun-copy:before {
+  content: "\e612";
+}
+.icon-dianhua-copy:before {
+  content: "\e621";
+}
+.icon-shoucang:before {
+  content: "\e62e";
+}
+.icon-xuanzhong2:before {
+  content: "\e62f";
+}
+.icon-gouwuche_:before {
+  content: "\e630";
+}
+.icon-icon-test:before {
+  content: "\e60c";
+}
+.icon-icon-test1:before {
+  content: "\e632";
+}
+.icon-bianji:before {
+  content: "\e74d";
+}
+.icon-bianji2:before {
+  content: "\e7a3";
+}
+.icon-jiazailoading-A:before {
+  content: "\e8fc";
+}
+.icon-zuoshang:before {
+  content: "\e613";
+}
+.icon-jia2:before {
+  content: "\e60a";
+}
+.icon-huifu:before {
+  content: "\e68b";
+}
+.icon-sousuo:before {
+  content: "\e7ce";
+}
+.icon-arrow-fine-up:before {
+  content: "\e601";
+}
+.icon-hot:before {
+  content: "\e60e";
+}
+.icon-lishijilu:before {
+  content: "\e6b9";
+}
+.icon-zhengxinchaxun-zhifubaoceping-:before {
+  content: "\e616";
+}
+.icon-naozhong:before {
+  content: "\e64a";
+}
+.icon-xiatubiao--copy:before {
+  content: "\e608";
+}
+.icon-shoucang_xuanzhongzhuangtai:before {
+  content: "\e6a9";
+}
+.icon-jia1:before {
+  content: "\e61c";
+}
+.icon-bangzhu1:before {
+  content: "\e63d";
+}
+.icon-arrow-left-bottom:before {
+  content: "\e602";
+}
+.icon-arrow-right-bottom:before {
+  content: "\e603";
+}
+.icon-arrow-left-top:before {
+  content: "\e604";
+}
+.icon-icon--:before {
+  content: "\e744";
+}
+.icon-zuojiantou-up:before {
+  content: "\e605";
+}
+.icon-xia:before {
+  content: "\e62d";
+}
+.icon--jianhao:before {
+  content: "\e60b";
+}
+.icon-weixinzhifu:before {
+  content: "\e61a";
+}
+.icon-comment:before {
+  content: "\e64f";
+}
+.icon-weixin:before {
+  content: "\e61f";
+}
+.icon-fenlei1:before {
+  content: "\e7f9";
+}
+.icon-erjiye-yucunkuan:before {
+  content: "\e623";
+}
+.icon-Group-:before {
+  content: "\e688";
+}
+.icon-you:before {
+  content: "\e743";
+}
+.icon-forward:before {
+  content: "\e607";
+}
+.icon-tuijian:before {
+  content: "\e610";
+}
+.icon-bangzhu:before {
+  content: "\e679";
+}
+.icon-kaidian:before {
+  content: "\e617";
+}
+.icon-share:before {
+  content: "\e75e";
+}
+.icon-share1:before {
+  content: "\e7a5";
+}
+.icon-yiguoqi:before {
+  content: "\e997";
+}
+.icon-shezhi1:before {
+  content: "\e76c";
+}
+.icon-fork:before {
+  content: "\e61b";
+}
+.icon-kafei:before {
+  content: "\e66a";
+}
+.icon-iLinkapp-:before {
+  content: "\e754";
+}
+.icon-kefu:before {
+  content: "\e61b";
+}
+.icon-saomiao:before {
+  content: "\e60d";
+}
+.icon-shezhi:before {
+  content: "\e78e";
+}
+.icon-shouhoutuikuan:before {
+  content: "\e76a";
+}
+.icon-dianpudingdan:before {
+  content: "\e77f";
+}
+.icon-gouwuche:before {
+  content: "\e609";
+}
+.icon-dizhi:before {
+  content: "\e644";
+}
+.icon-dizhi2:before {
+  content: "\e618";
+}
+.icon-fenlei:before {
+  content: "\e706";
+}
+.icon-xingxing:before {
+  content: "\e70b";
+}
+.icon-tuandui:before {
+  content: "\e633";
+}
+.icon-zuanshi:before {
+  content: "\e615";
+}
+.icon-zuo:before {
+  content: "\e63c";
+}
+.icon-shoucang2:before {
+  content: "\e6e7";
+}
+.icon-shouhuodizhi:before {
+  content: "\e644";
+}
+.icon-yishouhuo:before {
+  content: "\e773";
+}
+.icon-dianzan-ash:before {
+  content: "\e617";
+}
+view,
+scroll-view,
+swiper,
+swiper-item,
+cover-view,
+cover-image,
+icon,
+text,
+rich-text,
+progress,
+button,
+checkbox,
+form,
+input,
+label,
+radio,
+slider,
+switch,
+textarea,
+navigator,
+audio,
+camera,
+image,
+video {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/* 骨架屏替代方案 */
+.Skeleton {
+  background: #f3f3f3;
+  padding: 20rpx 0;
+  border-radius: 8rpx;
+}
+/* 图片载入替代方案 */
+.image-wrapper {
+  font-size: 0;
+  background: #f3f3f3;
+  border-radius: 4px;
+}
+.image-wrapper image {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  opacity: 0;
+}
+.image-wrapper image.loaded {
+  opacity: 1;
+}
+.clamp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+.common-hover {
+  background: #f5f5f5;
+}
+/*边框*/
+.b-b:after,
+.b-t:after {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  height: 0;
+  content: "";
+  -webkit-transform: scaleY(0.5);
+          transform: scaleY(0.5);
+  border-bottom: 1px solid #E4E7ED;
+}
+.b-b:after {
+  bottom: 0;
+}
+.b-t:after {
+  top: 0;
+}
+/* button样式改写 */
+uni-button,
+button {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  font-weight: normal;
+}
+uni-button.no-border:before, uni-button.no-border:after, button.no-border:before, button.no-border:after {
+  border: 0;
+}
+uni-button[type="default"],
+button[type="default"] {
+  color: #303133;
+}
+/* input 样式 */
+.input-placeholder {
+  color: #999999;
+}
+.placeholder {
+  color: #999999;
+}
+

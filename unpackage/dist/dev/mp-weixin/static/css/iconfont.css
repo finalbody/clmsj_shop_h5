@@ -1,0 +1,60 @@
+@font-face {
+    font-family: iconfont;
+    font-weight: normal;
+    font-style: normal;
+    src: url("./static/css/iconfont.ttf") format("truetype");
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.iconyoujiantou:before {
+  content: "\e68c";
+}
+
+.iconliebiao:before {
+  content: "\e609";
+}
+
+.iconliebiao1:before {
+  content: "\e611";
+}
+
+.iconshangdian:before {
+  content: "\e693";
+}
+
+.iconzhibo:before {
+  content: "\e8c1";
+}
+
+.icondingdan:before {
+  content: "\e64b";
+}
+
+.iconcheck:before {
+  content: "\e605";
+}
+
+.iconicon-question:before {
+  content: "\e66b";
+}
+
+.iconshipin:before {
+  content: "\e695";
+}
+
+.iconshouye:before {
+  content: "\e771";
+}
+
+.iconsave:before {
+  content: "\e996";
+}
+

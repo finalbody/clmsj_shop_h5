@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+/* 底部操作菜单 */
+.tabBar {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 95;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  width: 100%;
+  height: 100rpx;
+  background: white;
+  -webkit-box-shadow: 0 0 20rpx 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 20rpx 0 rgba(0, 0, 0, 0.5);
+  border-radius: 0px;
+}
+.tabBar .p-b-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  font-size: 24rpx;
+  color: #606266;
+  width: 50%;
+  height: 80rpx;
+  margin-top: 5px;
+}
+.tabBar .p-b-btn .yticon {
+  font-size: 50rpx;
+  line-height: 50rpx;
+  color: #909399;
+}
+.tabBar .p-b-btn.active, .tabBar .p-b-btn.active .yticon {
+  color: #fa436a;
+}
+.tabBar .p-b-btn .icon-fenxiang2 {
+  font-size: 42rpx;
+  -webkit-transform: translateY(-2rpx);
+          transform: translateY(-2rpx);
+}
+.tabBar .p-b-btn .icon-shoucang {
+  font-size: 46rpx;
+}
+.tabBar .action-btn-group {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 76rpx;
+  border-radius: 100px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 20rpx 40rpx -16rpx #fa436a;
+          box-shadow: 0 20rpx 40rpx -16rpx #fa436a;
+  -webkit-box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+          box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+  background: -webkit-gradient(linear, left top, right top, from(#ffac30), color-stop(#fa436a), to(#F56C6C));
+  background: -webkit-linear-gradient(left, #ffac30, #fa436a, #F56C6C);
+  background: linear-gradient(to right, #ffac30, #fa436a, #F56C6C);
+  margin-left: 20rpx;
+  position: relative;
+}
+.tabBar .action-btn-group:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 28rpx;
+  width: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.tabBar .action-btn-group .action-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 180rpx;
+  height: 100%;
+  font-size: 28rpx;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+

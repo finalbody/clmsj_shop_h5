@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+/* 底部操作菜单 */
+.login_tips {
+  padding: 0px;
+}
+.login_tips .mask-bg {
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  background: #303133;
+  opacity: 0.5;
+  z-index: 9998;
+  position: fixed;
+  padding-top: 30px;
+  height: 240px;
+}
+.login_tips .mask-bg-full {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #303133;
+  opacity: 0.5;
+  z-index: 9998;
+  position: fixed;
+}
+.login_tips .mask-box {
+  position: fixed;
+  bottom: 70px;
+  left: 5%;
+  right: 5%;
+  z-index: 9999;
+  background: #ffffff;
+  padding: 20px;
+  min-height: 150px;
+  border-radius: 5px;
+}
+.login_tips .full {
+  bottom: calc(50% - 75px);
+}
+.login_tips .login-btn {
+  padding-top: 20px;
+}
+.login_tips .login-btn button {
+  margin-bottom: 10px;
+}
+
