@@ -243,7 +243,6 @@
 <script>
 
 	export default {
-
 		data() {
 			return {
 				titleNViewBackground: '',
@@ -253,7 +252,15 @@
 				goodsList: []
 			};
 		},
-
+		onLoad(options) {
+		},
+		onShow() {
+			let sid = 1;
+		},
+		
+		methods: {
+		
+		},
 		onLoad() {
 			this.loadData();
 		},

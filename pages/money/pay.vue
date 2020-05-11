@@ -1,6 +1,6 @@
 <template>
 	<view class="app">
-		<!-- <view class="price-box">
+		<view class="price-box">
 			<text>支付金额</text>
 			<text class="price">38.88</text>
 		</view>
@@ -41,7 +41,7 @@
 			</view>
 		</view>
 		
-		<text class="mix-btn" @click="confirm">确认支付</text> -->
+		<text class="mix-btn" @click="confirm">确认支付</text>
 	</view>
 </template>
 

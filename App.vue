@@ -5,7 +5,10 @@
 import { mapMutations } from "vuex";
 export default {
     methods: {
-        request(url, data) {
+        req(url, data = {}) {
+            return this.request(this.$Url + '/' + url, data);
+        },
+        request(url, data = {}) {
             return new Promise((resolve, reject) => {
                 uni.request({
                     url,
@@ -26,16 +29,19 @@ export default {
         ...mapMutations(["login"])
     },
     onLaunch: function() {
-        let userInfo = uni.getStorageSync("userInfo") || "";
-        if (userInfo.id) {
-            //更新登陆状态
-            uni.getStorage({
-                key: "userInfo",
-                success: res => {
-                    this.login(res.data);
-                }
-            });
-        }
+        // uni.setStorageSync('session_key', 'ad0c191c968b08fc720cd6a5eab1dec1')
+        uni.setStorageSync('session_key', null)
+
+        // let userInfo = uni.getStorageSync("userInfo") || "";
+        // if (userInfo.id) {
+        //     //更新登陆状态
+        //     uni.getStorage({
+        //         key: "userInfo",
+        //         success: res => {
+        //             this.login(res.data);
+        //         }
+        //     });
+        // }
     },
     onShow: function(options) {
         console.log("App Show");
@@ -47,7 +53,6 @@ export default {
 </script>
 
 <style lang='scss'>
-
 @import "./static/css/iconfont.css";
 /*
 		全局公共样式和字体图标

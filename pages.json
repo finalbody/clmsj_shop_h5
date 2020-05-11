@@ -40,6 +40,17 @@
 			}
 		},
 		{
+			"path": "pages/public/login_phone",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
 			"path": "pages/user/center",
 			"style": {
 				"navigationBarTitleText": "我的钱包"
@@ -102,7 +113,6 @@
 				"navigationBarTitleText": "商品列表"
 			}
         },
-		
 		{
 			"path": "pages/product/product",
 			"style": {
