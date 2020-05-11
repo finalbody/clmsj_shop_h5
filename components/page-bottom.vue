@@ -2,7 +2,11 @@
 	<view class="content">
 		<!-- 底部操作菜单 -->
 		<view class="tabBar">
-			<navigator :url="'/pages/shop/index?sid='+ shopId" open-type="reLaunch" class="p-b-btn">
+			<navigator v-if="type=='tabBar'" url="/pages/index/index" open-type="reLaunch" class="p-b-btn">
+				<text class="yticon icon-shouye"></text>
+				<text>首页</text>
+			</navigator>
+			<navigator v-if="type=='shopBar'" :url="'/pages/shop/index?sid='+ shopId" open-type="reLaunch" class="p-b-btn">
 				<text class="yticon icon-shouye"></text>
 				<text>店铺首页</text>
 			</navigator>
