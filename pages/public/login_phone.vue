@@ -47,7 +47,7 @@
 </template>
 
 <script>
-const app = getApp()
+const app = getApp();
 import { mapMutations } from "vuex";
 
 export default {
@@ -64,10 +64,10 @@ export default {
         inputChange(e) {
             const key = e.currentTarget.dataset.key;
             this[key] = e.detail.value;
-		},
-		async getVcode(){
-			const res = await app.req('clmsj/goods/getAllGoodsTypeList')
-		},
+        },
+        async getVcode() {
+            const res = await app.req("clmsj/goods/getAllGoodsTypeList");
+        },
         navBack() {
             uni.navigateBack();
         },
@@ -90,14 +90,21 @@ export default {
                 mobile,
                 vcode
             };
-            const result = await this.$api.json("userInfo");
-            if (result.status === 1) {
-                this.login(result.data);
+
+            const res = await app.req("special/login/login", sendData);
+            if (res.data.code == 0) {
+                uni.setStorageSync("session_key", res.data.auth);
                 uni.navigateBack();
             } else {
-                this.$api.msg(result.msg);
-                this.logining = false;
+                this.$api.msg(res.data.msg);
             }
+            // if (result.status === 1) {
+            //     this.login(result.data);
+            //     uni.navigateBack();
+            // } else {
+            //     this.$api.msg(result.msg);
+            //     this.logining = false;
+            // }
         }
     }
 };
@@ -107,21 +114,21 @@ export default {
 page {
     background: #fff;
 }
-.row{
-	width: 100%;
-	display:flex;
-	align-items: center;
-	justify-content: space-between;
+.row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.vcode{
-	font-size: 26rpx;
-	color: #999;
-	width: 250rpx;
-	border-radius: 30rpx;
-	background-color: #fa436a;
-	color: white;
-	padding: 5rpx 20rpx;
-	text-align: center;
+.vcode {
+    font-size: 26rpx;
+    color: #999;
+    width: 250rpx;
+    border-radius: 30rpx;
+    background-color: #fa436a;
+    color: white;
+    padding: 5rpx 20rpx;
+    text-align: center;
 }
 .container {
     padding-top: 115px;

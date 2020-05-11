@@ -93,7 +93,9 @@ export default {
             }
         },
         async login_phone() {
-            console.log('phone')
+            uni.navigateTo({
+                 url: '/pages/public/login_phone'
+            });
         },
         getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
