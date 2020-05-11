@@ -1,6 +1,8 @@
 <template>
 	<view class="container">
-		
+		<view class="mp-search-box">
+			<input class="ser-input" type="text" placeholder="请输入关键词 如：上衣" v-model="searchVal" placeholder-class="placeholder" @blur="searchGoods" />
+		</view>
 		<!-- 头部轮播 -->
 		<view class="carousel-section" v-if="1==2">
 			<!-- 标题栏和状态栏占位符 -->
@@ -72,20 +74,29 @@
 			</view>
 		</view>
 		
-
+		<view style="height: 100px;"></view>
+		<!-- 底部操作菜单 -->
+		<page-bottom type="tabBar" :shopId="1"></page-bottom>
 	</view>
 </template>
 
 <script>
-
+const app = getApp();
+import pageBottom from '@/components/page-bottom';
+import uniLogin from '@/components/uni-login';
+import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 	export default {
+		components: {
+		    uniLogin,pageBottom,uniLoadMore
+		},
 		data() {
 			return {
 				titleNViewBackground: '',
 				swiperCurrent: 0,
 				swiperLength: 0,
 				carouselList: [],
-				goodsList: []
+				goodsList: [],
+				searchVal:''
 			};
 		},
 		onLoad(options) {
@@ -113,6 +124,22 @@
 				
 				let goodsList = await this.$api.json('goodsList');
 				this.goodsList = goodsList || [];
+			},
+			searchGoods(e){
+				let _this = this;
+				// uni.request({
+				// 	url: _this.$Url + '/clmsj/Team/searchTeam', // http://bull.hnw.net/index/bull/client_wash_info
+				// 	data: { 'id' : _this.searchVal},
+				// 	header:{
+				// 		'auth' : uni.getStorageSync('session_key')
+				// 	},
+				// 	method:'POST',
+				// 	success: (res) => {
+				// 		if (res.data.code == 0) {
+				// 			_this.teamList = res.data.data.team;
+				// 		}
+				// 	},
+				// })
 			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
@@ -157,56 +184,35 @@
 	}
 </script>
 
-<style lang="scss">
-	/* #ifdef MP */
+<style lang="scss">	
+	page {
+		background: #f5f5f5;
+	}
 	.mp-search-box{
-		position:absolute;
-		left: 0;
-		top: 30upx;
-		z-index: 9999;
 		width: 100%;
-		padding: 0 80upx;
+		padding: 10px 10px;
+		background: #FFFFFF;
 		.ser-input{
 			flex:1;
-			height: 56upx;
-			line-height: 56upx;
+			height: 66upx;
+			line-height: 66upx;
 			text-align: center;
 			font-size: 28upx;
 			color:$font-color-base;
 			border-radius: 20px;
-			background: rgba(255,255,255,.6);
+			background: #f2f2f2;
+		}
+		.placeholder{
+			color: #888888;
+			background-image: url(../../static/icon-search.png);
+			background-repeat: no-repeat;
+			text-indent: 40px;
+			background-size: 30rpx;
+			background-position: 30% center;
+			background-origin: content;
 		}
 	}
-	page{
-		.cate-section{
-			position:relative;
-			z-index:5;
-			border-radius:16upx 16upx 0 0;
-			margin-top:-20upx;
-		}
-		.carousel-section{
-			padding: 0;
-			.titleNview-placing {
-				padding-top: 0;
-				height: 0;
-			}
-			.carousel{
-				.carousel-item{
-					padding: 0;
-				}
-			}
-			.swiper-dots{
-				left:45upx;
-				bottom:40upx;
-			}
-		}
-	}
-	/* #endif */
 	
-	
-	page {
-		background: #f5f5f5;
-	}
 	.m-t{
 		margin-top: 16upx;
 	}
