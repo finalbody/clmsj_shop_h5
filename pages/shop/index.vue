@@ -213,8 +213,10 @@ export default {
     },
 
     async onLoad(options) {
-        this.cateId = options.tid;
-		this.userInfo = uni.getStorageSync('userInfo');
+		this.cateId = options.tid;
+		const res = await app.req('clmsj/user/getUser')
+		this.userInfo = res.data.user
+		// this.userInfo = uni.getStorageSync('userInfo');
 		this.sid = options.sid || uni.getStorageSync('sid');
 		this.sid = this.sid || 0;
 		uni.setStorageSync('sid',this.sid);
@@ -224,7 +226,7 @@ export default {
 		    });
 		}
 		console.log('sid==' + this.sid);
-        this.loadCateList(options.fid, options.sid);
+		this.loadCateList(options.fid, options.sid);
     },
     onShow() {
         if (this.play_media == 1) {

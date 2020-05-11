@@ -268,9 +268,9 @@ export default {
 		
         this.imgList = goods.goodsphoto_image;
         this.videoList = goods.goodsphoto_video;
-		uni.setNavigationBarTitle({
-			title:this.goods.name
-		})
+		// uni.setNavigationBarTitle({
+		// 	title:this.goods.name
+		// })
 		
 		let resList = await app.request(this.$Url + "/clmsj/goods/myshop", {
 			shop_id : this.sid
