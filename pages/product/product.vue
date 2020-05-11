@@ -269,7 +269,7 @@ export default {
         this.imgList = goods.goodsphoto_image;
         this.videoList = goods.goodsphoto_video;
 		uni.setNavigationBarTitle({
-			title:this.goods.name
+			title:this.goods.goods_remark || '商品详情'
 		})
 		
 		let resList = await app.request(this.$Url + "/clmsj/goods/myshop", {
@@ -321,6 +321,12 @@ export default {
         },
         //规格弹窗开关
         toggleSpec() {
+			console.log(this.specList.size.list.length);
+			console.log(this.specList.size.list.length);
+			if(this.specList.size.list.length == 0 && this.specList.color.list.length == 0){
+				this.buy();
+				return;
+			}
             if (this.specClass === "show") {
                 this.specClass = "hide";
                 setTimeout(() => {
@@ -344,26 +350,7 @@ export default {
 			console.log(this.specSelected);
         },
         shareBtn(goods_id, shop_id) {
-            uni.share({
-                provider: "weixin",
-                scene: "WXSceneSession",
-                type: 5,
-                imageUrl:
-                    "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png",
-                title: "欢迎体验",
-                miniProgram: {
-                    id: "wxbceb417181a3492f",
-                    path: "pages/index/index",
-                    type: 1,
-                    webUrl: "http://uniapp.dcloud.io"
-                },
-                success: function(res) {
-                    console.log("success:" + JSON.stringify(res));
-                },
-                fail: function(err) {
-                    console.log("fail:" + JSON.stringify(err));
-                }
-            });
+            
         },
         //分享
         share() {

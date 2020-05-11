@@ -15,7 +15,7 @@
 			<text class="yticon icon-shanchu" @click.stop="delAddress(item)"></text>
 		</view>
 		<view class="handle">
-			<button type="warn" @tap="chooseAddress">获取微信地址</button>
+			<!-- <button type="warn" @tap="chooseAddress">获取微信地址</button> -->
 			<button class="add-btn" @click="addAddress('add')">新增地址</button>
 		</view>
 		

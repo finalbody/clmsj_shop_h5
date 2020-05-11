@@ -31,8 +31,8 @@
 				<view class="right">
 					<view class="title">{{goods.goods_remark}}</view>
 					<view class="spec">
-						<text>尺码：{{specSelected.size}}</text>
-						<text>颜色：{{specSelected.color}}</text>
+						<text v-if="specSelected.size">{{specSelected.size}}</text>
+						<text v-if="specSelected.color">{{specSelected.color}}</text>
 					</view>
 					<view class="price-box">
 						<text class="price">￥{{goods.shop_total_price}}</text>
@@ -241,11 +241,17 @@
 						success: (res) => {
 							console.log('创建订单成功')
 							this.order_sn = res.data.data;
-							this.payment(this.order_sn);
+							uni.navigateTo({
+								url:'/pages/money/pay?ordersn=' + this.order_sn
+							})
+							// this.payment(this.order_sn);
 						}
 					});
 				}else{
-					this.payment(this.order_sn);
+					uni.navigateTo({
+						url:'/pages/money/pay?ordersn=' + this.order_sn
+					})
+					// this.payment(this.order_sn);
 				}
 				// uni.redirectTo({
 				// 	url: '/pages/money/pay'
