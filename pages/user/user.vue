@@ -4,12 +4,12 @@
 		<view class="user-section">
 			<image class="bg" src="/static/user-bg.jpg"></image>
 			<view class="user-info-box">
-				<block v-if="userInfo.nickName">
+				<block v-if="userInfo.id">
 					<view class="portrait-box">
 						<image class="portrait" :src="userInfo.avatarUrl || '/static/missing-face.png'"></image>
 					</view>
 					<view class="info-box">
-						<view class="username">{{userInfo.nickName}}</view>
+						<view class="username">{{userInfo.nickName || userInfo.mobile}}</view>
 						<view v-if="userInfo.role == 1">
 							<view class="invite_code" @tap="copy(storeInfo.invite_code)">
 								邀请码：{{storeInfo.invite_code}} <text class="btn-copy">复制</text>
@@ -214,6 +214,12 @@
 			}
 		},
 		onShow(){
+			const session_key = uni.getStorageSync('session_key')
+			if(!session_key){
+				this.showLogin = 1
+			}else{
+				this.showLogin = 0
+			}
 			// this.livePlayer();
 			this.loadData();
 		},

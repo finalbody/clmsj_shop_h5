@@ -153,7 +153,7 @@
 		<view style="height: 100px;"></view>
 		<!-- 底部操作菜单 -->
 		<page-bottom type="tabBar" :shopId="shop.id"></page-bottom>
-		<uni-login type="login" :showLogin="1" :onlyLogin='0'></uni-login>
+		<uni-login type="login" :showLogin="showLogin" :onlyLogin='0'></uni-login>
 		<!-- <view class="page-bottom">
 			<navigator :url="'/pages/shop/index?sid='+ shop.id" class="p-b-btn">
 				<text class="yticon icon-shouye"></text>
@@ -198,7 +198,7 @@ export default {
             shop: {},
 			sid:0,
 			searchVal:'',
-			showLogin:1,
+			showLogin:0,
 			userInfo:{
 				id:0
 			}
@@ -229,6 +229,12 @@ export default {
 		this.loadCateList(options.fid, options.sid);
     },
     onShow() {
+		const session_key = uni.getStorageSync('session_key')
+		if(!session_key){
+			this.showLogin = 1
+		}else{
+			this.showLogin = 0
+		}
         if (this.play_media == 1) {
             this.play_media = 0;
         } else {

@@ -41,7 +41,7 @@ export default {
         },
         showLogin: {
             type: Number,
-            default: "1"
+            default: 1
         },
         onlyLogin: {
             type: Number,
