@@ -66,7 +66,14 @@ export default {
             this[key] = e.detail.value;
         },
         async getVcode() {
-            const res = await app.req("clmsj/goods/getAllGoodsTypeList");
+			if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+				this.$api.msg('请输入正确的手机号码')
+				return
+			}
+			const res = await app.req("special/login/sendMobileCode", {
+				mobile: this.mobile
+			})
+			console.log(res)
         },
         navBack() {
             uni.navigateBack();
