@@ -41,7 +41,7 @@ export default {
         },
         showLogin: {
             type: Number,
-            default: 1
+            default: "1"
         },
         onlyLogin: {
             type: Number,
@@ -52,7 +52,7 @@ export default {
         }
     },
     async created() {
-        this.userInfo = uni.getStorageSync("userInfo");
+        // this.userInfo = uni.getStorageSync("userInfo");
         if (this.getIsWxClient()) {
             this.env = "weixin";
         } else {
@@ -60,9 +60,11 @@ export default {
         }
 
         const session_key = uni.getStorageSync("session_key") || "";
+      
         if(session_key){
             this.showLoginBox = 0;
         }
+
         if (!session_key) {
             const code = this.getQueryString("code") || "";
             if (code) {
@@ -81,6 +83,12 @@ export default {
                 }
             }
         }
+
+        uni.$on('login_hide', () => {
+            this.showLoginBox = 0
+        })
+
+        console.log(this.userInfo, this.showLoginBox, this.showLogin)
     },
     methods: {
         async login_wx() {

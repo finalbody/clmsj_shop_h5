@@ -220,6 +220,7 @@
 			}else{
 				this.showLogin = 0
 			}
+
 			// this.livePlayer();
 			this.loadData();
 		},

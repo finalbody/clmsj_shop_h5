@@ -66,14 +66,19 @@ export default {
             this[key] = e.detail.value;
         },
         async getVcode() {
-			if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-				this.$api.msg('请输入正确的手机号码')
-				return
-			}
-			const res = await app.req("special/login/sendMobileCode", {
-				mobile: this.mobile
-			})
-			console.log(res)
+            if (!/^1[3456789]\d{9}$/.test(this.mobile)) {
+                this.$api.msg("请输入正确的手机号码");
+                return;
+            }
+            const res = await app.req("special/login/sendMobileCode", {
+                mobile: this.mobile
+            });
+
+            if (res.data.code == 0) {
+                this.$api.msg("发送成功");
+            } else {
+                this.$api.msg(res.data.msg);
+            }
         },
         navBack() {
             uni.navigateBack();
@@ -95,13 +100,17 @@ export default {
 				*/
             const sendData = {
                 mobile,
-                vcode
+                code: vcode
             };
 
             const res = await app.req("special/login/login", sendData);
             if (res.data.code == 0) {
-                uni.setStorageSync("session_key", res.data.auth);
-                uni.navigateBack();
+				uni.setStorageSync("session_key", res.data.auth);
+                this.$api.msg('登陆成功');
+                uni.$emit('login_hide')
+				setTimeout(() => {
+                	uni.navigateBack();
+				}, 1000);
             } else {
                 this.$api.msg(res.data.msg);
             }
