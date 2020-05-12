@@ -29,8 +29,9 @@ export default {
         ...mapMutations(["login"])
     },
     onLaunch: function() {
+
         // uni.setStorageSync('session_key', 'ad0c191c968b08fc720cd6a5eab1dec1')
-        uni.setStorageSync('session_key', null)
+        // uni.setStorageSync('session_key', null)
 
         // let userInfo = uni.getStorageSync("userInfo") || "";
         // if (userInfo.id) {

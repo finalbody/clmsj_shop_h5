@@ -100,9 +100,12 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 			};
 		},
 		onLoad(options) {
+			
 		},
 		onShow() {
 			let sid = 1;
+			// localStorage.a = '33'
+			console.log(localStorage.a);
 		},
 		
 		methods: {

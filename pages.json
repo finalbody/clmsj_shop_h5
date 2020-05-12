@@ -11,6 +11,19 @@
 			}
 		},
 		{
+			"path": "pages/money/paySuccess",
+			"style": {
+				"navigationBarTitleText": "支付成功"
+			}
+		},
+		{
+			"path": "pages/money/pay",
+			"style": {
+				"navigationBarTitleText": "支付"
+			}
+		},
+		
+		{
 			"path": "pages/public/login_phone",
 			"style": {
 				"navigationBarTitleText": "",
@@ -224,19 +237,8 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
-		}, {
-			"path": "pages/money/pay",
-			"style": {
-				"navigationBarTitleText": "支付"
-			}
 		},
 		{
-			"path": "pages/money/paySuccess",
-			"style": {
-				"navigationBarTitleText": "支付成功"
-			}
-		}
-	    ,{
             "path" : "pages/notice/notice",
             "style" : {
 				"navigationBarTitleText": "通知"

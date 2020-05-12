@@ -58,7 +58,8 @@ export default {
             logining: false
         };
     },
-    onLoad() {},
+    onLoad() {
+    },
     methods: {
         ...mapMutations(["login"]),
         inputChange(e) {
@@ -109,10 +110,12 @@ export default {
                 this.$api.msg('登陆成功');
                 uni.$emit('login_hide')
 				setTimeout(() => {
-                	uni.navigateBack();
-				}, 1000);
+                    uni.navigateBack();
+                    this.logining = false;
+                }, 1000);
             } else {
                 this.$api.msg(res.data.msg);
+                this.logining = false;
             }
             // if (result.status === 1) {
             //     this.login(result.data);

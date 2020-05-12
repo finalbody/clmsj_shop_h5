@@ -223,6 +223,7 @@
 
 			// this.livePlayer();
 			this.loadData();
+        	console.log(session_key)
 		},
 		onLoad(){
 		},

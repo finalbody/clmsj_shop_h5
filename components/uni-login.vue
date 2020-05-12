@@ -3,8 +3,8 @@
         <!-- 底部操作菜单 -->
         <view class="login_tips" v-if="!userInfo.id && (showLogin==1 && showLoginBox==1)">
             <view v-if="fullLogin==1" class="mask-bg-full"></view>
-            <view v-else class="mask-bg"></view>
-            <view class="mask-box" :class="{'full' : fullLogin==1}">
+            <!-- <view v-else class="mask-bg"></view> -->
+            <view class="mask-box" style="border: 1rpx solid #ddd" :class="{'full' : fullLogin==1}">
                 <view style="text-align: left;line-height: 30px;">登录商城可以获得更多体验权限，现在登陆吗？</view>
                 <view class="login-btn">
                     <button type="warn" lang="zh_CN" @tap="login_phone">
@@ -87,8 +87,6 @@ export default {
         uni.$on('login_hide', () => {
             this.showLoginBox = 0
         })
-
-        console.log(this.userInfo, this.showLoginBox, this.showLogin)
     },
     methods: {
         async login_wx() {
