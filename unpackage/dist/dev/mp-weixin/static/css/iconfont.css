@@ -14,6 +14,18 @@
 }
 
 
+.iconarrowLeft:before {
+  content: "\e60e";
+}
+
+.iconshouhuo:before {
+  content: "\e60f";
+}
+
+.icongroup:before {
+  content: "\e630";
+}
+
 .iconyoujiantou:before {
   content: "\e68c";
 }
@@ -57,4 +69,5 @@
 .iconsave:before {
   content: "\e996";
 }
+
 

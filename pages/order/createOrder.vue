@@ -56,7 +56,7 @@
 		</view>
 		<view style="margin: 20px 10px;">
 		<button class="submit" type="warn" @tap="submit">
-			<text v-if="order_sn ==''">立即支付</text>
+			<text v-if="order_id ==0">立即支付</text>
 			<text v-else>继续支付</text>
 		</button>
 		</view>
@@ -122,7 +122,7 @@
 					},
 				],
 				addressData: {},
-				order_sn:'',
+				order_id:0,
 				userInfo:{},
 				share_uid:0
 			}
@@ -217,7 +217,7 @@
 				this.payType = type;
 			},
 			submit(){
-				if(this.order_sn == ''){
+				if(this.order_id == 0){
 					if(!this.addressData.id){
 						uni.showToast({
 							icon:'none',
@@ -240,27 +240,28 @@
 						header:{ 'auth' : uni.getStorageSync('session_key') },
 						success: (res) => {
 							console.log('创建订单成功')
-							this.order_sn = res.data.data;
+							this.order_id = res.data.data;
 							uni.navigateTo({
-								url:'/pages/money/pay?ordersn=' + this.order_sn
+								url:'/pages/money/pay?order_id=' + this.order_id
 							})
-							// this.payment(this.order_sn);
+							// this.payment(this.order_id);
 						}
 					});
 				}else{
 					uni.navigateTo({
-						url:'/pages/money/pay?ordersn=' + this.order_sn
+						url:'/pages/money/pay?order_id=' + this.order_id
 					})
-					// this.payment(this.order_sn);
+					// this.payment(this.order_id);
 				}
 				// uni.redirectTo({
 				// 	url: '/pages/money/pay'
 				// })
 			},
-			payment(order_sn){
+			payment(order_id){
+				return;
 				uni.request({
 					url: this.$Url + '/clmsj/order/getPayParam',
-					data: { order_sn: order_sn },
+					data: { order_id: order_id },
 					header:{ 'auth' : uni.getStorageSync('session_key') },
 					success: (resp) => {
 						let res = resp.data.data;
@@ -276,9 +277,9 @@
 								uni.showToast({
 									title:'支付成功'
 								});
-								this.order_sn = '';
+								this.order_id = '';
 								uni.redirectTo({
-									url: '/pages/money/paySuccess?order_sn='+this.order_sn
+									url: '/pages/money/paySuccess?order_id='+this.order_id
 								})
 							},
 							fail: (err)=> {

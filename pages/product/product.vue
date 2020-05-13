@@ -150,9 +150,9 @@
 		<view class="page-bottom">
 			<view class="action-handle">
 				<view class="item">
-					<navigator url="/pages/shop/index" open-type="reLaunch" class="p-b-btn">
+					<navigator url="/pages/index/index" open-type="reLaunch" class="p-b-btn">
 						<text class="yticon icon-dianpu"></text>
-						<text>店铺</text>
+						<text>首页</text>
 					</navigator>
 				</view>
 				<!-- <navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">

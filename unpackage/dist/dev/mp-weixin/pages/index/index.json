@@ -1,5 +1,9 @@
 {
   "enablePullDownRefresh": true,
   "navigationBarTitleText": "潮流买手街",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-login": "/components/uni-login",
+    "page-bottom": "/components/page-bottom",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
 }

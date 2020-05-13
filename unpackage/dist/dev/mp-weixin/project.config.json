@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.9.2",
 	"appid": "wxbceb417181a3492f",
-	"projectname": "潮流买手街",
+	"projectname": "%E6%BD%AE%E6%B5%81%E4%B9%B0%E6%89%8B%E8%A1%97",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -22,43 +22,13 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
-			"current": -1,
-			"list": []
-		},
-		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/product/product",
-					"pathName": "pages/product/product",
-					"query": "goods_id=6&sid=8",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/user/user",
-					"pathName": "pages/user/user",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shop/team",
-					"pathName": "pages/shop/team",
-					"query": "",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

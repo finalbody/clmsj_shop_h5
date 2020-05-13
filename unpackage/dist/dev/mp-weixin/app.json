@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/public/login_phone",
     "pages/user/center",
     "pages/user/withdrawlist",
     "pages/user/balancelist",
@@ -55,5 +56,6 @@
       "desc": "购买商品配送时，需要获取用户位置，方便发货"
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap66.json"
 }
