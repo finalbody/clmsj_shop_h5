@@ -117,6 +117,8 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 		},
 		onShow() {
 			let sid = 1;
+			// localStorage.a = '33'
+			// console.log(localStorage.a);
 		},
 		onLoad() {
 			const session_key = uni.getStorageSync('session_key')

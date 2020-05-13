@@ -224,6 +224,7 @@
 
 			// this.livePlayer();
 			this.loadData();
+        	console.log(session_key)
 		},
 		onLoad(){
 		},
@@ -258,6 +259,12 @@
 						},
 						method:'POST',
 						success: (res) => {
+							if(res.data.code == 2){
+								uni.setStorageSync('session_key', null)
+								uni.$emit('login_show')
+								return
+							}
+
 							if (res.data.code == 0) {
 								_this.userInfo = res.data.data.user;
 								_this.storeInfo = res.data.data.shop;
