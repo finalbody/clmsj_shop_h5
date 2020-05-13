@@ -22,7 +22,18 @@
 			</view>
 		</view>
 		<!-- 分类 -->
-		<view class="cate-section">
+		<view class="cate-box">
+		    <view class="cate-bar">
+		        <view
+		            class="cate-item"
+		            :class="{active: cateId == item.id}"
+		            v-for="(item, index) in cateList"
+		            :key="index"
+		            @tap="switchCate(item.id)"
+		        >{{item.name}}</view>
+		    </view>
+		</view>
+		<!-- <view class="cate-section">
 			<view class="cate-item">
 				<image src="/static/temp/c3.png"></image>
 				<text>环球美食</text>
@@ -43,7 +54,7 @@
 				<image src="/static/temp/c8.png"></image>
 				<text>速食生鲜</text>
 			</view>
-		</view>
+		</view> -->
 		
 		<!-- <view class="ad-1">
 			<image src="/static/temp/ad1.jpg" mode="scaleToFill"></image>
@@ -60,20 +71,23 @@
 			<text class="yticon icon-you"></text>
 		</view>
 		 -->
-		<view class="guess-section">
-			<view 
+		<view class="guess-section" v-if="goodsList.length > 0">
+			<view
 				v-for="(item, index) in goodsList" :key="index"
 				class="guess-item"
 				@click="navToDetailPage(item)"
 			>
 				<view class="image-wrapper">
-					<image :src="item.image" mode="aspectFill"></image>
+					<image :src="item.original_img" mode="aspectFill"></image>
 				</view>
-				<text class="title clamp">{{item.title}}</text>
-				<text class="price">￥{{item.price}}</text>
+				<text class="title clamp">{{item.goods_remark}}</text>
+				<text class="price">￥{{item.total_price}}</text>
 			</view>
+			
 		</view>
-		
+		<view v-if="goodsList.length == 0" class="not-data">
+			没有更多商品
+		</view>
 		<view style="height: 100px;"></view>
 		<!-- 底部操作菜单 -->
 		<page-bottom type="tabBar" :shopId="1"></page-bottom>
@@ -95,51 +109,106 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 				swiperCurrent: 0,
 				swiperLength: 0,
 				carouselList: [],
+				cateList: [],
 				goodsList: [],
-				searchVal:''
+				searchVal:'',
+				cateId:0
 			};
-		},
-		onLoad(options) {
 		},
 		onShow() {
 			let sid = 1;
 		},
-		
-		methods: {
-		
-		},
 		onLoad() {
-			this.loadData();
+			const session_key = uni.getStorageSync('session_key')
+			if(!session_key){
+				this.showLogin = 1
+			}else{
+				this.showLogin = 0
+			}
+			this.loadData("refresh");
+			this.loadCateList();
+		},
+		onPageScroll(e) {
+		    //兼容iOS端下拉时顶部漂移
+		    if (e.scrollTop >= 0) {
+		        this.headerPosition = "fixed";
+		    } else {
+		        this.headerPosition = "absolute";
+		    }
+		},
+		//下拉刷新
+		onPullDownRefresh() {
+		    this.loadData("refresh");
+		},
+		//加载更多
+		onReachBottom() {
+		    this.loadData('more');
 		},
 		methods: {
-			/**
-			 * 请求静态数据只是为了代码不那么乱
-			 * 分次请求未作整合
-			 */
-			async loadData() {
-				let carouselList = await this.$api.json('carouselList');
-				this.titleNViewBackground = carouselList[0].background;
-				this.swiperLength = carouselList.length;
-				this.carouselList = carouselList;
-				
-				let goodsList = await this.$api.json('goodsList');
-				this.goodsList = goodsList || [];
+			//加载分类
+			async loadCateList() {
+			    const res = await app.request(
+			        this.$Url + "/clmsj/Goodshtml/getgoodstypelist"
+			    );
+			    this.cateList = res.data.data || [];
+			    this.cateList.unshift({id: 0, name:'全部'})
+			    this.cateId = this.cateList[0].id;
 			},
-			searchGoods(e){
-				let _this = this;
-				// uni.request({
-				// 	url: _this.$Url + '/clmsj/Team/searchTeam', // http://bull.hnw.net/index/bull/client_wash_info
-				// 	data: { 'id' : _this.searchVal},
-				// 	header:{
-				// 		'auth' : uni.getStorageSync('session_key')
-				// 	},
-				// 	method:'POST',
-				// 	success: (res) => {
-				// 		if (res.data.code == 0) {
-				// 			_this.teamList = res.data.data.team;
-				// 		}
-				// 	},
-				// })
+			//加载商品 ，带下拉刷新和上滑加载
+			async loadData(type = "add", loading) {
+			    //没有更多直接返回
+			    if (type === "add") {
+			        if (this.loadingType === "nomore") {
+			            return;
+			        }
+			        this.loadingType = "loading";
+			    } else {
+			        this.loadingType = "more";
+			    }
+			
+			    if (type === "refresh") {
+			        this.page = 1;
+			    }
+			
+			    uni.request({
+			        url: this.$Url + "/clmsj/Goodshtml/get_shop_goodslist",
+			        header: {  auth: uni.getStorageSync("session_key") },
+			        data: {
+			            page: this.page,
+						keyword: this.searchVal,
+						catid : this.cateId
+			        },
+			        method: "POST",
+			        success: res => {
+			            if (res.data.code == 0) {
+			                let goodsList = res.data.data;
+			                this.page++;
+			                if (type == "refresh") {
+			                    this.goodsList = goodsList;
+			                } else {
+			                    this.goodsList = this.goodsList.concat(goodsList);
+			                }
+							console.log('DDD')
+							console.log(this.goodsList.length)
+			                //判断是否还有下一页，有是more  没有是nomore(测试数据判断大于20就没有了)
+			                this.loadingType = goodsList.length < 10 ? "nomore" : "more";
+			                if (type === "refresh") {
+			                    if (loading == 1) {
+			                        uni.hideLoading();
+			                    } else {
+			                        uni.stopPullDownRefresh();
+			                    }
+			                }
+			            }
+			        }
+			    });
+			},
+			searchGoods(){
+				this.loadData();
+			},
+			switchCate(cate_id) {
+			    this.cateId = cate_id;
+			    this.loadData("refresh");
 			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
@@ -149,39 +218,12 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 			},
 			//详情页
 			navToDetailPage(item) {
-				//测试数据没有写id，用title代替
-				let id = item.title;
 				uni.navigateTo({
-					url: `/pages/product/product?id=${id}`
-				})
-			},
-		},
-		// #ifndef MP
-		// 标题栏input搜索框点击
-		onNavigationBarSearchInputClicked: async function(e) {
-			this.$api.msg('点击了搜索框');
-		},
-		//点击导航栏 buttons 时触发
-		onNavigationBarButtonTap(e) {
-			const index = e.index;
-			if (index === 0) {
-				this.$api.msg('点击了扫描');
-			} else if (index === 1) {
-				// #ifdef APP-PLUS
-				const pages = getCurrentPages();
-				const page = pages[pages.length - 1];
-				const currentWebview = page.$getAppWebview();
-				currentWebview.hideTitleNViewButtonRedDot({
-					index
+				    url: "/pages/product/product?goods_id=" + item.goods_id + "&sid=1"
 				});
-				// #endif
-				uni.navigateTo({
-					url: '/pages/notice/notice'
-				})
 			}
 		}
-		// #endif
-	}
+	};
 </script>
 
 <style lang="scss">	
@@ -212,7 +254,24 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 			background-origin: content;
 		}
 	}
-	
+	.cate-box {
+	    width: 100%;
+	    overflow: scroll;
+	    background-color: white;
+		font-size: 16px;
+	    .cate-bar {
+	        display: flex;
+	        .cate-item {
+	            flex-shrink: 0;
+	            padding: 15upx 30upx;
+	            color: #999;
+	        }
+	        .active {
+	            color: #333;
+				border-bottom: 2px solid #FA436A;
+	        }
+	    }
+	}
 	.m-t{
 		margin-top: 16upx;
 	}
@@ -547,11 +606,11 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 			}
 		}
 	}
-	/* 猜你喜欢 */
+
 	.guess-section{
 		display:flex;
 		flex-wrap:wrap;
-		padding: 0 30upx;
+		padding: 15px 30upx;
 		background: #fff;
 		.guess-item{
 			display:flex;
@@ -583,7 +642,12 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 			color: $uni-color-primary;
 			line-height: 1;
 		}
+		
 	}
-	
+	.not-data{
+		text-align: center;
+		font-size: 14px;
+		margin-top: 50px;
+	}
 
 </style>

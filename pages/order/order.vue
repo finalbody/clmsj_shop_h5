@@ -55,7 +55,7 @@
 						</view>
 						<view class="action-box b-t">
 							<button v-if="item.state==0 || item.state==1" class="action-btn" @tap="handleOrder(item,index,9)">取消订单</button>
-							<button v-if="item.state==0 || item.state==1" class="action-btn confirm" @tap="payment(item.out_trade_no)">立即支付</button>
+							<button v-if="item.state==0 || item.state==1" class="action-btn confirm" @tap="payment(item.id)">立即支付</button>
 							<button v-if="item.state==2 || item.state==3" class="action-btn recom" @tap="viewExpress(item)">查看物流</button>
 							<button v-if="item.state==2 || item.state==3" class="action-btn confirm" @tap="handleOrder(item,index,4)">确认收货</button>
 							<button v-if="item.state==9" class="action-btn" disabled="true">{{item.stateTip}}</button>
@@ -85,6 +85,7 @@
 				tabCurrentIndex: 0,
 				loadingType: 'more',
 				orderList:{},
+				loaded:'',
 				page:0,
 				navList: [{
 						state: 0,
@@ -212,39 +213,43 @@
 				}, 600)
 			},
 			//订单支付
-			payment(order_sn){
-				uni.request({
-					url: this.$Url + '/clmsj/order/getPayParam',
-					data: { order_sn: order_sn },
-					header:{ 'auth' : uni.getStorageSync('session_key') },
-					success: (resp) => {
-						let res = resp.data.data;
-						// 调起支付
-						uni.requestPayment({
-							provider: 'wxpay',
-							timeStamp: res.timeStamp,
-							nonceStr: res.nonceStr,
-							package: res.package,
-							signType: 'MD5',
-							paySign: res.paySign,
-							success: (res) => {
-								uni.showToast({
-									title:'支付成功'
-								});
-								uni.redirectTo({
-									url: '/pages/money/paySuccess?order_sn='+this.order_sn
-								})
-							},
-							fail: (err)=> {
-								console.log('fail:' + JSON.stringify(err));
-								uni.showToast({
-									icon:'none',
-									title:'支付失败'
-								})
-							}
-						});
-					}
-				});
+			payment(order_id){
+				uni.navigateTo({
+					url:'/pages/money/pay?order_id=' + order_id
+				})
+				return;
+				// uni.request({
+				// 	url: this.$Url + '/clmsj/order/getPayParam',
+				// 	data: { order_id: order_id },
+				// 	header:{ 'auth' : uni.getStorageSync('session_key') },
+				// 	success: (resp) => {
+				// 		let res = resp.data.data;
+				// 		// 调起支付
+				// 		uni.requestPayment({
+				// 			provider: 'wxpay',
+				// 			timeStamp: res.timeStamp,
+				// 			nonceStr: res.nonceStr,
+				// 			package: res.package,
+				// 			signType: 'MD5',
+				// 			paySign: res.paySign,
+				// 			success: (res) => {
+				// 				uni.showToast({
+				// 					title:'支付成功'
+				// 				});
+				// 				uni.redirectTo({
+				// 					url: '/pages/money/paySuccess?order_id='+this.order_id
+				// 				})
+				// 			},
+				// 			fail: (err)=> {
+				// 				console.log('fail:' + JSON.stringify(err));
+				// 				uni.showToast({
+				// 					icon:'none',
+				// 					title:'支付失败'
+				// 				})
+				// 			}
+				// 		});
+				// 	}
+				// });
 			},
 			//订单操作
 			handleOrder(item,index,state){

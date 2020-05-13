@@ -29,8 +29,9 @@
 			</view>
 			<view class="vip-card-box">
 				<image class="card-bg" src="/static/vip-card-bg.png" mode=""></image>
-				<view v-if="userInfo.role == 0" @tap="navTo('/pages/shop/init')" class="b-btn">申请开店</view>
-				<view v-if="userInfo.role == 1" @tap="navTo('/pages/shop/index?sid='+ storeInfo.id)" class="b-btn">查看店铺</view>
+				<!-- <view v-if="userInfo.role == 0" @tap="navTo('/pages/shop/init')" class="b-btn">申请开店</view> -->
+				<!-- <view v-if="userInfo.role == 1" @tap="navTo('/pages/index/index')" class="b-btn">查看商城</view> -->
+				<view @tap="navTo('/pages/index/index')" class="b-btn">查看商城</view>
 				<view class="tit">
 					<text class="yticon icon-iLinkapp-"></text>
 					<text v-if="userInfo.role == 0">普通会员</text>
@@ -104,16 +105,16 @@
 					<image @click="navTo('/pages/product/product')" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=191678693,2701202375&fm=26&gp=0.jpg" mode="aspectFill"></image>
 				</scroll-view> -->
 				
-				<list-cell v-if="userInfo.role != 1" icon="icon-kaidian" iconColor="#e07472" title="申请开店" @tap="navTo('/pages/shop/init')"></list-cell>
+				<list-cell v-if="userInfo.role != 1 &&  1==2" icon="icon-kaidian" iconColor="#e07472" title="申请开店" @tap="navTo('/pages/shop/init')"></list-cell>
 
-				<list-cell icon="icon-qianbao" iconColor="#e07472" title="我的钱包" @tap="navTo('/pages/user/center')"></list-cell>
+				<list-cell icon="icon-qianbao" iconColor="#e07472" title="我的钱包" @eventClick="navTo('/pages/user/center')"></list-cell>
 				<list-cell icon="icon-dizhi2" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/address/address')"></list-cell>
 				<!-- <list-cell icon="icon-share" iconColor="#9789f7" title="分享" tips="邀请好友赢10万大礼"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell> -->
-				<list-cell icon="icon-shoucang2" iconColor="#54b4ef" @tap="navTo('/pages/index/index')" title="浏览过的店铺"></list-cell>
+				<list-cell v-if="1==2" icon="icon-shoucang2" iconColor="#54b4ef" @tap="navTo('/pages/index/index')" title="浏览过的店铺"></list-cell>
 			</view>
 			
-			<view v-if="userInfo.role == 1" class="shop-section icon">
+			<view v-if="userInfo.role == 1 && 1==2" class="shop-section icon">
 				<view class="tit-name">店长专区</view>
 				<view class="tj-sction" style="border-bottom: 1px solid #EEEEEE; margin: 0px 10px;">
 					<view class="tj-item">

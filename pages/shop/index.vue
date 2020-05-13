@@ -367,7 +367,7 @@ export default {
 		},
         shareShop() {},
         detailBtn(goods_id,sid) {
-             uni.navigateTo({
+            uni.navigateTo({
                 url: "/pages/product/product?goods_id=" + goods_id + "&sid=" + this.shop.id
             });
         },
