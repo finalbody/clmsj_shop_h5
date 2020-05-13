@@ -18,6 +18,10 @@ export default {
                     data,
                     method: "POST",
                     success: res => {
+                        if(res.data.code == 2){
+                            uni.setStorageSync('session_key', null)
+                            uni.$emit('login_show')
+                        }
                         resolve(res);
                     },
                     fail() {
@@ -31,7 +35,7 @@ export default {
     onLaunch: function() {
 
         // uni.setStorageSync('session_key', 'ad0c191c968b08fc720cd6a5eab1dec1')
-        // uni.setStorageSync('session_key', null)
+        uni.setStorageSync('session_key', '123123123')
 
         // let userInfo = uni.getStorageSync("userInfo") || "";
         // if (userInfo.id) {
