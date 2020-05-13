@@ -5,12 +5,12 @@
             <view v-if="fullLogin==1" class="mask-bg-full"></view>
             <!-- <view v-else class="mask-bg"></view> -->
             <view class="mask-box" style="border: 1rpx solid #ddd" :class="{'full' : fullLogin==1}">
-                <view style="text-align: left;line-height: 30px;font-size:30rpx">登录商城可以获得更多体验权限，现在登陆吗？</view>
+                <view style="text-align: left;line-height: 30px;font-size:28rpx">登录商城可以获得更多体验权限，现在登陆吗？</view>
                 <view class="login-btn">
                     <button type="warn" lang="zh_CN" @tap="login_phone">
                         <text>手机登陆</text>
                     </button>
-                    <button type="primary" lang="zh_CN" @tap="login_wx">
+                    <button type="primary" v-if="env=='weixin'" lang="zh_CN" @tap="login_wx">
                         <text>微信登陆</text>
                     </button>
                     <button v-if="onlyLogin==0" type="default" @tap="hideLoginBox()">
