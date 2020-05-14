@@ -184,7 +184,7 @@
 				<!-- <button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button> -->
 			</view>
 		</view>
-		<uni-login ref="uniLogin"  type="login" :showLogin="1" :onlyLogin='0'></uni-login>
+		<uni-login ref="uniLogin"  type="login" :showLogin="showLogin" :onlyLogin='0'></uni-login>
     </view>
 </template>
 
@@ -227,6 +227,7 @@ export default {
 					list:[]
 				},
 			},
+			showLogin:0
         };
     },
     async onLoad(options) {
@@ -363,11 +364,16 @@ export default {
         buy() {
 			let userInfo = uni.getStorageSync('userInfo');
 			let auth =  uni.getStorageSync('session_key');
-			if(!auth && !userInfo.id){
+			
+			console.log(uni.getStorageSync('session_key'));
+			console.log(userInfo.id)
+			
+			
+			if(!auth){
+				this.showLogin = 1;
 				this.$refs.uniLogin.toggleMask();
 				return;
 			}
-			
 			// console.log("this.specList.length==" + this.specList.length)
 			if(this.specList.size.list.length > 0 || this.specList.color.list.length > 0){
 				if(!this.specSelected.size || !this.specSelected.color){

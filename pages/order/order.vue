@@ -25,7 +25,6 @@
 					<view 
 						v-for="(item,index) in orderList" :key="index"
 						class="order-item"
-						@tap="orderDetail(item)"
 					>
 						<view class="i-top b-b">
 							<text class="time">{{item.create_time}}</text>
@@ -36,7 +35,7 @@
 								@click="deleteOrder(index)"
 							></text>
 						</view>
-						<view class="goods-box-single">
+						<view class="goods-box-single" @tap="orderDetail(item)">
 							<image class="goods-img" :src="item.goods.original_img" mode="aspectFill"></image>
 							<view class="right">
 								<view class="title clamp">{{item.goods.goods_remark}}</view>
