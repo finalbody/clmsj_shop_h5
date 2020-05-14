@@ -3,6 +3,7 @@
  * vuex管理登陆状态，具体可以参考官方登陆模板示例
  */
 import { mapMutations } from "vuex";
+import jweixin from "jweixin-module";
 export default {
     methods: {
         req(url, data = {}) {
@@ -18,8 +19,8 @@ export default {
                     data,
                     method: "POST",
                     success: res => {
-                        if (res.data.code == 2) {
-                            uni.setStorageSync("session_key", null);
+                        if (res.data.code == 999) {
+                            uni.setStorageSync("session_key", undefined);
                             uni.$emit("login_show");
                         }
                         resolve(res);
@@ -30,19 +31,17 @@ export default {
                 });
             });
         },
-        weixinJssdk() {
-            wx.config({
-                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: "", // 必填，公众号的唯一标识
-                timestamp: "", // 必填，生成签名的时间戳
-                nonceStr: "", // 必填，生成签名的随机串
-                signature: "", // 必填，签名
-                jsApiList: [] // 必填，需要使用的JS接口列表
+        async weixinJssdk() {
+            const res = await this.req('clmsj/goodshtml/getSignPackage', {
+                url: window.location.href.split('#')[0]
             });
-            wx.ready(function() {
+            res.data.debug = true
+            res.data.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo","onMenuShareQZone"]
+            jweixin.config(res.data);
+            jweixin.ready(function() {
                 // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
                 // 分享到朋友圈按钮点击状态及自定义分享内容
-                wx.onMenuShareTimeline({
+                jweixin.onMenuShareTimeline({
                     title: "", // 分享标题
                     link: "", // 分享链接
                     imgUrl: "", // 分享图标
@@ -53,7 +52,7 @@ export default {
                         // 用户取消分享后执行的回调函数
                     }
                 });
-                wx.onMenuShareAppMessage({
+                jweixin.onMenuShareAppMessage({
                     title: "", // 分享标题
                     desc: "", // 分享描述
                     link: "", // 分享链接
@@ -71,7 +70,7 @@ export default {
         },
 
         weixinShare(title) {
-            wx.onMenuShareTimeline({
+            jweixin.onMenuShareTimeline({
                 title, // 分享标题
                 link: "", // 分享链接
                 imgUrl: "", // 分享图标
@@ -82,7 +81,7 @@ export default {
                     // 用户取消分享后执行的回调函数
                 }
             });
-            wx.onMenuShareAppMessage({
+            jweixin.onMenuShareAppMessage({
                 title, // 分享标题
                 desc: "", // 分享描述
                 link: "", // 分享链接
@@ -101,7 +100,7 @@ export default {
     },
     onLaunch: function() {
         // uni.setStorageSync('session_key', 'ad0c191c968b08fc720cd6a5eab1dec1')
-        // uni.setStorageSync('session_key', '123123123')
+        // uni.setStorageSync('session_key', null)
 
         // let userInfo = uni.getStorageSync("userInfo") || "";
         // if (userInfo.id) {
@@ -113,15 +112,8 @@ export default {
         //         }
         //     });
         // }
-        
-        console.log(wx)
-        if(wx.config){
-        console.log(123123)
 
-        }
-        if(wx){
-            this.weixinJssdk();
-        }
+        this.weixinJssdk();
     },
     onShow: function(options) {
         console.log("App Show");
