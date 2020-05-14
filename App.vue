@@ -3,10 +3,11 @@
  * vuex管理登陆状态，具体可以参考官方登陆模板示例
  */
 import { mapMutations } from "vuex";
+import jweixin from "jweixin-module";
 export default {
     methods: {
         req(url, data = {}) {
-            return this.request(this.$Url + '/' + url, data);
+            return this.request(this.$Url + "/" + url, data);
         },
         request(url, data = {}) {
             return new Promise((resolve, reject) => {
@@ -18,9 +19,9 @@ export default {
                     data,
                     method: "POST",
                     success: res => {
-                        if(res.data.code == 2){
-                            uni.setStorageSync('session_key', null)
-                            uni.$emit('login_show')
+                        if (res.data.code == 999) {
+                            uni.setStorageSync("session_key", undefined);
+                            uni.$emit("login_show");
                         }
                         resolve(res);
                     },
@@ -30,11 +31,76 @@ export default {
                 });
             });
         },
+        async weixinJssdk() {
+            const res = await this.req('clmsj/goodshtml/getSignPackage', {
+                url: window.location.href.split('#')[0]
+            });
+            res.data.debug = true
+            res.data.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo","onMenuShareQZone"]
+            jweixin.config(res.data);
+            jweixin.ready(function() {
+                // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                // 分享到朋友圈按钮点击状态及自定义分享内容
+                jweixin.onMenuShareTimeline({
+                    title: "", // 分享标题
+                    link: "", // 分享链接
+                    imgUrl: "", // 分享图标
+                    success: function() {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function() {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                jweixin.onMenuShareAppMessage({
+                    title: "", // 分享标题
+                    desc: "", // 分享描述
+                    link: "", // 分享链接
+                    imgUrl: "", // 分享图标
+                    type: "", // 分享类型,music、video或link，不填默认为link
+                    dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function() {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function() {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+        },
+
+        weixinShare(title) {
+            jweixin.onMenuShareTimeline({
+                title, // 分享标题
+                link: "", // 分享链接
+                imgUrl: "", // 分享图标
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            jweixin.onMenuShareAppMessage({
+                title, // 分享标题
+                desc: "", // 分享描述
+                link: "", // 分享链接
+                imgUrl: "", // 分享图标
+                type: "", // 分享类型,music、video或link，不填默认为link
+                dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+                success: function() {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function() {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        },
         ...mapMutations(["login"])
     },
     onLaunch: function() {
-
         // uni.setStorageSync('session_key', 'ad0c191c968b08fc720cd6a5eab1dec1')
+        // uni.setStorageSync('session_key', null)
 
         // let userInfo = uni.getStorageSync("userInfo") || "";
         // if (userInfo.id) {
@@ -46,6 +112,8 @@ export default {
         //         }
         //     });
         // }
+
+        this.weixinJssdk();
     },
     onShow: function(options) {
         console.log("App Show");
