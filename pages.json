@@ -9,7 +9,7 @@
 					"titleNView": false
 				}
 			}
-		},
+		}, 
 		{
 			"path": "pages/money/paySuccess",
 			"style": {
@@ -68,7 +68,27 @@
 				"navigationBarTitleText": "我的下级"
 			}
 		},
-		
+		{
+		    "path" : "pages/store/index",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商家控制台"
+			}
+		},
+		{
+		    "path" : "pages/store/bind",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "绑定管理员"
+			}
+		},
+		{
+		    "path" : "pages/store/verify",
+		    "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "订单核销"
+			}
+		},
 		{
 		    "path" : "pages/shop/index",
 		    "style" : {

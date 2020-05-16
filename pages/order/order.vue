@@ -25,7 +25,6 @@
 					<view 
 						v-for="(item,index) in orderList" :key="index"
 						class="order-item"
-						@tap="orderDetail(item)"
 					>
 						<view class="i-top b-b">
 							<text class="time">{{item.create_time}}</text>
@@ -36,7 +35,7 @@
 								@click="deleteOrder(index)"
 							></text>
 						</view>
-						<view class="goods-box-single">
+						<view class="goods-box-single" @tap="orderDetail(item)">
 							<image class="goods-img" :src="item.goods.original_img" mode="aspectFill"></image>
 							<view class="right">
 								<view class="title clamp">{{item.goods.goods_remark}}</view>
@@ -54,12 +53,21 @@
 							<text class="price">{{item.total_money}}</text>
 						</view>
 						<view class="action-box b-t">
-							<button v-if="item.state==0 || item.state==1" class="action-btn" @tap="handleOrder(item,index,9)">取消订单</button>
-							<button v-if="item.state==0 || item.state==1" class="action-btn confirm" @tap="payment(item.id)">立即支付</button>
-							<button v-if="item.state==2 || item.state==3" class="action-btn recom" @tap="viewExpress(item)">查看物流</button>
-							<button v-if="item.state==2 || item.state==3" class="action-btn confirm" @tap="handleOrder(item,index,4)">确认收货</button>
-							<button v-if="item.state==9" class="action-btn" disabled="true">{{item.stateTip}}</button>
-							<button v-if="item.state==4 || item.state==5" class="action-btn" disabled="true">订单已完成</button>
+							<block v-if="item.goods_type_state ==1">
+								<button v-if="item.state==0 || item.state==1" class="action-btn" @tap="handleOrder(item,index,9)">取消订单</button>
+								<button v-if="item.state==0 || item.state==1" class="action-btn confirm" @tap="payment(item.id)">立即支付</button>
+								<button v-if="item.state==3" class="action-btn confirm">待使用</button>
+								<button v-if="item.state==9" class="action-btn" disabled="true">{{item.stateTip}}</button>
+								<button v-if="item.state==4 || item.state==5" class="action-btn" disabled="true">已核销使用</button>
+							</block>
+							<block v-else>
+								<button v-if="item.state==0 || item.state==1" class="action-btn" @tap="handleOrder(item,index,9)">取消订单</button>
+								<button v-if="item.state==0 || item.state==1" class="action-btn confirm" @tap="payment(item.id)">立即支付</button>
+								<button v-if="item.state==3" class="action-btn recom" @tap="viewExpress(item)">查看物流</button>
+								<button v-if="item.state==3" class="action-btn confirm" @tap="handleOrder(item,index,4)">确认收货</button>
+								<button v-if="item.state==9" class="action-btn" disabled="true">{{item.stateTip}}</button>
+								<button v-if="item.state==4 || item.state==5" class="action-btn" disabled="true">订单已完成</button>
+							</block>
 						</view>
 					</view>
 					 

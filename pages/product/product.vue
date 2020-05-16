@@ -182,55 +182,33 @@
                 <!-- <navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">
 					<text class="yticon icon-gouwuche"></text>
 					<text>购物车</text>
-                </navigator>-->
-                <view class="item p-b-btn" :class="{active: favorite}" @click="toFavorite">
-                    <text class="yticon icon-shoucang"></text>
-                    <text>收藏</text>
-                </view>
-                <view class="item p-b-btn" v-if="goods.status==0">
-                    <button
-                        type="primary"
-                        class="btn-none"
-                        open-type="contact"
-                        :send-message-title="shop.name"
-                        :send-message-img="shop.cover || '/static/shop-bg-none.png'"
-                        :send-message-path="'/pages/shop/index?sid='+ shop.id"
-                        :session-from="'sid='+ shop.id"
-                        show-message-card="true"
-                    >
-                        <text class="yticon icon-kefu"></text>
-                        <text>客服</text>
-                    </button>
-                </view>
-            </view>
-            <view class="action-btn-group">
-                <block v-if="goods.status==0">
-                    <button
-                        type="primary"
-                        class="action-btn no-border buy-now-btn"
-                        @click="toggleSpec"
-                    >
-                        <text class="yticon icon-weixinzhifu"></text>立即购买
-                    </button>
-                </block>
-                <block v-else>
-                    <button
-                        type="primary"
-                        class="action-btn no-border buy-now-btn"
-                        open-type="contact"
-                        :send-message-title="shop.name"
-                        :send-message-img="shop.cover || '/static/shop-bg-none.png'"
-                        :send-message-path="'/pages/shop/index?sid='+ shop.id"
-                        :session-from="'sid='+ shop.id"
-                        show-message-card="true"
-                    >
-                        <text class="yticon icon-kefu"></text>联系客服
-                    </button>
-                </block>
-                <!-- <button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button> -->
-            </view>
-        </view>
-        <uni-login ref="uniLogin" type="login" :showLogin="1" :onlyLogin="0"></uni-login>
+				</navigator> -->
+				<view class="item p-b-btn" :class="{active: favorite}" @click="toFavorite">
+					<text class="yticon icon-shoucang"></text>
+					<text>收藏</text>
+				</view>
+				<view class="item p-b-btn" v-if="goods.status==0">
+					<button type="primary" class="btn-none" open-type="contact" :send-message-title="shop.name" :send-message-img="shop.cover || '/static/shop-bg-none.png'" :send-message-path="'/pages/shop/index?sid='+ shop.id" :session-from="'sid='+ shop.id" show-message-card="true">
+						<text class="yticon icon-kefu"></text>
+						<text>客服</text>
+					</button>
+				</view>
+			</view>
+			<view class="action-btn-group">
+				<block v-if="goods.status==0">
+					<button type="primary" class=" action-btn no-border buy-now-btn" @click="toggleSpec">
+						<text class="yticon icon-weixinzhifu"></text>立即购买
+					</button>
+				</block>
+				<block v-else>
+					<button type="primary" class="action-btn no-border buy-now-btn" open-type="contact" :send-message-title="shop.name" :send-message-img="shop.cover || '/static/shop-bg-none.png'" :send-message-path="'/pages/shop/index?sid='+ shop.id" :session-from="'sid='+ shop.id" show-message-card="true">
+						<text class="yticon icon-kefu"></text>联系客服
+					</button>
+				</block>
+				<!-- <button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button> -->
+			</view>
+		</view>
+		<uni-login ref="uniLogin"  type="login" :showLogin="showLogin" :onlyLogin='0'></uni-login>
     </view>
 </template>
 
@@ -251,29 +229,30 @@ export default {
             videoList: [],
             hotGoodsList: [],
             imgList: [],
-            shop: [],
-            share_uid: 0,
-            isLive: 0,
-            desc: "",
-            specClass: "none",
-            specSelected: {
-                size: "",
-                color: ""
-            },
-            specList: {
-                size: {
-                    key: "size",
-                    name: "尺码",
-                    selected: "",
-                    list: []
-                },
-                color: {
-                    key: "color",
-                    name: "颜色",
-                    selected: "",
-                    list: []
-                }
-            }
+			shop:[],
+			share_uid:0,
+			isLive:0,
+            desc: '',
+			specClass: 'none',
+			specSelected:{
+				size:'',
+				color:''
+			},
+			specList: {
+				size:{
+					key:'size',
+					name: '尺码',
+					selected:'',
+					list:[]
+				},
+				color:{
+					key:'color',
+					name: '颜色',
+					selected:'',
+					list:[]
+				},
+			},
+			showLogin:0
         };
     },
     async onLoad(options) {
@@ -432,42 +411,44 @@ export default {
             this.favorite = !this.favorite;
         },
         buy() {
-            let userInfo = uni.getStorageSync("userInfo");
-            let auth = uni.getStorageSync("session_key");
-            if (!auth && !userInfo.id) {
-                this.$refs.uniLogin.toggleMask();
-                return;
-            }
-
-            // console.log("this.specList.length==" + this.specList.length)
-            if (
-                this.specList.size.list.length > 0 ||
-                this.specList.color.list.length > 0
-            ) {
-                if (!this.specSelected.size || !this.specSelected.color) {
-                    uni.showToast({
-                        icon: "none",
-                        title: "请选择尺码及颜色再进行购买"
-                    });
-                    return;
-                } else {
-                    if (this.specSelected.num <= 0) {
-                        uni.showToast({
-                            icon: "none",
-                            title: "库存不足"
-                        });
-                        return;
-                    }
-                }
-            }
-            let param = this.specSelected;
-            param.sid = this.sid;
-            param.goods_id = this.goods.goods_id;
-            param.live = this.isLive;
-            param.share_uid = this.share_uid || 0;
-
-            console.log("buy share_uid" + this.share_uid);
-
+			let userInfo = uni.getStorageSync('userInfo');
+			let auth =  uni.getStorageSync('session_key');
+			
+			console.log(uni.getStorageSync('session_key'));
+			console.log(userInfo.id)
+			
+			
+			if(!auth){
+				this.showLogin = 1;
+				this.$refs.uniLogin.toggleMask();
+				return;
+			}
+			// console.log("this.specList.length==" + this.specList.length)
+			if(this.specList.size.list.length > 0 || this.specList.color.list.length > 0){
+				if(!this.specSelected.size || !this.specSelected.color){
+					uni.showToast({
+						icon:'none',
+						title:'请选择尺码及颜色再进行购买'
+					})
+					return;
+				}else{
+					if(this.specSelected.num <= 0){
+						uni.showToast({
+							icon:'none',
+							title:'库存不足'
+						})
+						return;
+					}
+				}
+			}
+			let param = this.specSelected;
+			param.sid = this.sid;
+			param.goods_id = this.goods.goods_id;
+			param.live = this.isLive;
+			param.share_uid = this.share_uid || 0;
+			
+			console.log('buy share_uid' + this.share_uid);
+			
             uni.navigateTo({
                 url: `/pages/order/createOrder?detail=` + JSON.stringify(param)
             });
