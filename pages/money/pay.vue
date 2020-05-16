@@ -16,27 +16,25 @@
                     <radio color="#fa436a" :checked="payType == 'weixin'" />
                 </label>
             </view>
-            <!-- <view class="type-item b-b" @click="changePayType(2)">
-				<text class="icon yticon icon-alipay"></text>
-				<view class="con">
-					<text class="tit">翼支付支付</text>
-				</view>
-				<label class="radio">
-					<radio value="" color="#fa436a" :checked='payType == 2' />
-					</radio>
-				</label>
-			</view>
-			<view class="type-item" @click="changePayType(3)">
-				<text class="icon yticon icon-erjiye-yucunkuan"></text>
-				<view class="con">
-					<text class="tit">预存款支付</text>
-					<text>可用余额 ¥198.5</text>
-				</view>
-				<label class="radio">
-					<radio value="" color="#fa436a" :checked='payType == 3' />
-					</radio>
-				</label>
-            </view>-->
+            <view class="type-item b-b" @click="changePayType('yipay')">
+                <text class="icon yticon icon-alipay"></text>
+                <view class="con">
+                    <text class="tit">翼支付支付</text>
+                </view>
+                <label class="radio">
+                    <radio value color="#fa436a" :checked="payType == 'yipay'" />
+                </label>
+            </view>
+            <view class="type-item" @click="changePayType(3)">
+                <text class="icon yticon icon-erjiye-yucunkuan"></text>
+                <view class="con">
+                    <text class="tit">预存款支付</text>
+                    <text>可用余额 ¥198.5</text>
+                </view>
+                <label class="radio">
+                    <radio value color="#fa436a" :checked="payType == 3" />
+                </label>
+            </view>
         </view>
 
         <text class="mix-btn" @click="confirm">确认支付</text>
@@ -77,7 +75,43 @@ export default {
             if (this.payType == "weixin") {
                 this.makeWeixinPay();
             }
+
+            if (this.payType == "yipay") {
+                this.makeYipay();
+            }
         },
+
+        async makeYipay() {
+            const res = await app.req("clmsj/Payyi/generatePay", {
+                id: this.order_id
+            });
+            if (res.data.code == 0) {
+                const data = res.data.data;
+                const form = document.createElement("form");
+                document.body.appendChild(form);
+
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        const element = data[key];
+                        form.appendChild(this.generateHideElement(key, element));
+                    }
+                }
+                form.method = "POST";
+                form.action = "https://mapi.bestpay.com.cn/mapi/form/cashier/H5/pay";
+                form.submit();
+            } else {
+                this.$api.msg(res.data.msg);
+            }
+        },
+       
+        generateHideElement(name, value) {
+            var tempInput = document.createElement("input");
+            tempInput.type = "hidden";
+            tempInput.name = name;
+            tempInput.value = value;
+            return tempInput;
+        },
+
         makeWeixinPay() {
             if (typeof WeixinJSBridge == "undefined") {
                 if (document.addEventListener) {
