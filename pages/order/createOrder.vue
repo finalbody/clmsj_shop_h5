@@ -192,9 +192,9 @@
 						this.goods = res.data.data;
 						
 						if(_this.goods.cat_id1 != 101){
-							uni.showLoading({
-								title: "加载中..."
-							});		
+							// uni.showLoading({
+							// 	title: "加载中..."
+							// });		
 							uni.request({
 								url: _this.$Url + '/clmsj/Address/get_default_address',
 								data: {},
