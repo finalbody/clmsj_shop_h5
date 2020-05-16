@@ -101,12 +101,15 @@ export default {
 				*/
             const sendData = {
                 mobile,
-                code: vcode
+                code: vcode,
+                pid: app.globalData.pid
             };
 
             const res = await app.req("special/login/login", sendData);
             if (res.data.code == 0) {
-				uni.setStorageSync("session_key", res.data.auth);
+                uni.setStorageSync("session_key", res.data.auth);
+                const re = await app.req('clmsj/user/getUser')
+                uni.setStorageSync("userInfo", res.data.user);
                 this.$api.msg('登陆成功');
                 uni.$emit('login_hide')
 				setTimeout(() => {

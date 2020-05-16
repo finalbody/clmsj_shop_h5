@@ -69,11 +69,16 @@ export default {
             const code = this.getQueryString("code") || "";
             if (code) {
                 const res = await app.req("special/login/getCode", {
-                    code
+                    code,
+                    pid: app.globalData.pid
                 });
 
                 if (res.data.code == 0) {
                     uni.setStorageSync("session_key", res.data.auth);
+                    
+                    const re = await app.req('clmsj/user/getUser')
+                    uni.setStorageSync("userInfo", res.data.user);
+
                     this.showLoginBox = 0;
                     if (this.parentObj == "loadData") {
                         this.$emit("pLoadData");
