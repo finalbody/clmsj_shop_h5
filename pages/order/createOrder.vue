@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 地址 -->
-		<navigator url="/pages/address/address?source=1" class="address-section">
+		<navigator v-if="goods.cat_id1 != 101" url="/pages/address/address?source=1" class="address-section">
 			<view class="order-content">
 				<text class="yticon icon-shouhuodizhi"></text>
 				<view class="cen" v-if="addressData.name">
@@ -168,12 +168,13 @@
 		methods: {
 			loadData(option){
 				let _this = this;
-				uni.showLoading({
-					title: "加载中..."
-				});		
+				
 				uni.request({
-					url: this.$Url + '/clmsj/Address/get_default_address',
-					data: {},
+					url: this.$Url + '/clmsj/goods/goodsdetail_shop',
+					data: {
+						goods_id : option.goods_id,
+						shop_id : option.sid
+					},
 					header:{	'auth' : uni.getStorageSync('session_key')	},
 					success: (res) => {
 						if(res.data.code == 999){
@@ -187,33 +188,41 @@
 							_this.$refs.uniLogin.toggleMask('loadData');
 							return;
 						}
-						if(res.data.code ==0){
-							this.addressData = res.data.data.address;
-						}else{
-							uni.hideLoading();
-							uni.showToast({
-								icon:'none',
-								title:'请先设置收货信息再进行购买'
-							});
-							// setTimeout(()=>{
-							// 	uni.navigateTo({
-							// 		url:'/pages/address/address'
-							// 	})
-							// },1500);
-							
-						}
-					}
-				});
-				uni.request({
-					url: this.$Url + '/clmsj/goods/goodsdetail_shop',
-					data: {
-						goods_id : option.goods_id,
-						shop_id : option.sid
-					},
-					header:{	'auth' : uni.getStorageSync('session_key')	},
-					success: (res) => {
 						console.log(res.data.data);
 						this.goods = res.data.data;
+						
+						if(_this.goods.cat_id1 != 101){
+							uni.showLoading({
+								title: "加载中..."
+							});		
+							uni.request({
+								url: _this.$Url + '/clmsj/Address/get_default_address',
+								data: {},
+								header:{	'auth' : uni.getStorageSync('session_key')	},
+								success: (resad) => {
+									if(resad.data.code == 999){
+										uni.showToast({
+											icon:'none',
+											title:'请重新登陆'
+										});
+										uni.setStorageSync('session_key',undefined);
+										uni.setStorageSync('userInfo',undefined);
+										_this.showLogin = 1;
+										_this.$refs.uniLogin.toggleMask('loadData');
+										return;
+									}
+									if(resad.data.code ==0){
+										_this.addressData = resad.data.data.address;
+									}else{
+										uni.hideLoading();
+										uni.showToast({
+											icon:'none',
+											title:'请先设置收货信息再进行购买'
+										});
+									}
+								}
+							});
+						}
 					}
 				});
 				uni.hideLoading();
@@ -235,12 +244,14 @@
 			},
 			submit(){
 				if(this.order_id == 0){
-					if(!this.addressData.id){
-						uni.showToast({
-							icon:'none',
-							title:'请先设置您的收货地址'
-						})
-						return false;
+					if(this.goods.cat_id1 != 101){
+						if(!this.addressData.id){
+							uni.showToast({
+								icon:'none',
+								title:'请先设置您的收货地址'
+							})
+							return false;
+						}
 					}
 					console.log("save order =share_uid : " + this.share_uid)
 					uni.request({
@@ -252,7 +263,8 @@
 							desc : this.desc,
 							address_id: this.addressData.id,
 							specSelected : this.specSelected,
-							share_uid : this.share_uid
+							share_uid : this.share_uid,
+							source : 'h5'
 						},
 						header:{ 'auth' : uni.getStorageSync('session_key') },
 						success: (res) => {

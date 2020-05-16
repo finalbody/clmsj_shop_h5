@@ -40,8 +40,8 @@
 					</text>
 					<text v-else>游客</text>
 				</view>
-				<text class="e-m">潮流买手街</text>
-				<text class="e-b">开通会员，让您生意无忧</text>
+				<!-- <text class="e-m">潮流买手街</text>
+				<text class="e-b">让您生意无忧</text> -->
 			</view>
 		</view>
 		
@@ -111,7 +111,9 @@
 				<list-cell icon="icon-dizhi2" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/address/address')"></list-cell>
 				<!-- <list-cell icon="icon-share" iconColor="#9789f7" title="分享" tips="邀请好友赢10万大礼"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell> -->
-				<list-cell v-if="1==2" icon="icon-shoucang2" iconColor="#54b4ef" @tap="navTo('/pages/index/index')" title="浏览过的店铺"></list-cell>
+				<list-cell icon="icon-shoucang2" iconColor="#54b4ef" @eventClick="navTo('/pages/store/index')" title="商家控制台"></list-cell>
+				<list-cell v-if="1==2" icon="icon-shoucang2" iconColor="#54b4ef" @eventClick="navTo('/pages/index/index')" title="浏览过的店铺"></list-cell>
+				
 			</view>
 			
 			<view v-if="userInfo.role == 1 && 1==2" class="shop-section icon">
@@ -342,6 +344,7 @@
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			navTo(url,type){
+				
 				console.log(url)
 				if(!uni.getStorageSync('session_key') || !this.userInfo.id){
 					// uni.navigateTo({

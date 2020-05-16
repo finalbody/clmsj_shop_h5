@@ -4,7 +4,7 @@
 			<text class="state" :style="{color: order.stateTipColor}">{{order.stateTip}}</text>
 		</view>
 		<!-- 地址 -->
-		<view class="address-section">
+		<view class="address-section" v-if="order.goods_type_state !=1">
 			<view class="order-content">
 				<text class="yticon icon-shouhuodizhi"></text>
 				<view class="cen">
@@ -60,15 +60,31 @@
 				<input class="desc" type="text" v-model="order.desc" disabled="" placeholder="无" placeholder-class="placeholder" />
 			</view>
 		</view>
-		
+		<view class="verify-code" v-if="order.goods_type_state ==1">
+			<!-- <view>核销码：{{order.verification_code}}</view> -->
+			<view>
+				<image :src="order.verification_img"></image>
+				<view>请将此二维码展示给商家核销</view>
+			</view>
+		</view>
 		<view class="handle" style="margin: 20px 10px;">	
-			<button v-if="order.state==1" type="warn" @tap="payment(order.id)">立即支付</button>
-			<button v-if="order.state==0 || order.state==1" type="default" @tap="handleOrder(order,9)">取消订单</button>
+			<block v-if="order.goods_type_state ==1">
+				<button v-if="order.state==0 || order.state==1" class="action-btn" @tap="handleOrder(order,9)">取消订单</button>
+				<button v-if="order.state==0 || order.state==1" class="action-btn confirm" @tap="payment(order.id)">立即支付</button>
+				<button v-if="order.state==3" class="action-btn confirm">待使用</button>
+				<button v-if="order.state==9" class="action-btn" disabled="true">{{order.stateTip}}</button>
+				<button v-if="order.state==4 || order.state==5" class="action-btn" disabled="true">已核销使用</button>
+			</block>
+			<block v-else>
+				<button v-if="order.state==1" type="warn" @tap="payment(order.id)">立即支付</button>
+				<button v-if="order.state==0 || order.state==1" type="default" @tap="handleOrder(order,9)">取消订单</button>
+				
+				<button v-if="order.state==3" type="warn" @tap="handleOrder(order,4)">确认收货</button>
+				<button v-if="order.state==3" @tap="viewExpress(order)">查看物流</button>
+				<button v-if="order.state==9" class="action-btn" disabled="true">{{order.stateTip}}</button>
+				<button v-if="order.state==4 || order.state==5" class="action-btn" disabled="true">订单已完成</button>
+			</block>
 			
-			<button v-if="order.state==2 || order.state==3" type="warn" @tap="handleOrder(order,4)">确认收货</button>
-			<button v-if="order.state==2 || order.state==3" @tap="viewExpress(order)">查看物流</button>
-			<button v-if="order.state==9" class="action-btn" disabled="true">{{order.stateTip}}</button>
-			<button v-if="order.state==4 || order.state==5" class="action-btn" disabled="true">订单已完成</button>
 		</view>
 
 	</view>
@@ -239,6 +255,18 @@
 		font-size: 18px;
 		text{
 			margin-left: 30px;
+		}
+	}
+	
+	.verify-code{
+		padding: 30px 10px;
+		font-size: 14px;
+		background: #FFFFFF;
+		text-align: center;
+		image{
+			width: 140px;
+			height: 140px;
+			// vertical-align: middle;
 		}
 	}
 	.address-section {

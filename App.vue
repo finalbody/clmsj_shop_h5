@@ -133,7 +133,7 @@ export default {
     font-family: yticon;
     font-weight: normal;
     font-style: normal;
-    src: url("https://at.alicdn.com/t/font_1749157_x73lgogykpd.ttf")
+    src: url("https://at.alicdn.com/t/font_1749157_x77knulwmps.ttf")
         format("truetype");
 }
 
@@ -143,6 +143,9 @@ export default {
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+.icon-scan:before {
+    content: "\e762";
 }
 .icon-zhibo:before {
     content: "\e701";
